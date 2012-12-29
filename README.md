@@ -1,11 +1,10 @@
 ## Personal dotfiles
 
-These are my personal dotfiles that I'm using on Mac OSX and Linux.
-All vim plugins are added as a git submodule.
+My personal dotfiles that I'm using on Mac OSX and Linux.
 
 Install:
 
-    git clone --recursive https://github.com/farslan/dotfiles.git
+    git clone https://github.com/dogukancagatay/dotfiles.git
     cd dotfiles
     make
 

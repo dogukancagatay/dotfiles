@@ -1,6 +1,6 @@
 [user]
-	name = Fatih Arslan
-	email = ftharsln@gmail.com
+	name = Dogukan Cagatay
+	email = dcagatay@gmail.com
 [alias]
     st = status
     ci = commit
@@ -34,4 +34,4 @@
 [credential]
 	helper = osxkeychain
 [github]
-	user = farslan
+	user = dogukancagatay 

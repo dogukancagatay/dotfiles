@@ -1,331 +1,132 @@
-" .vimrc
-set nocompatible                "Turn off compability mode with Vi, we don't need that anymore
+" Written by Aron Griffis <agriffis@gentoo.org>
+" Modified by Ryan Phillips <rphillips@gentoo.org>
+" Added Redhat's vimrc info by Seemant Kulleen <seemant@gentoo.org>
+" Added some enhancements by A. Murat Eren <meren@uludag.org.tr>
+" Tidy up by Onur Küçük <onur@pardus.org.tr>
+" Some good stuff is taken from Derek Wyatt's Vim Configuration <http://github.com/derekwyatt>
+" Some more good stuff is taken from Fatih Arslan's Vim Configuration <http://github.com/farslan>
+" And bundled by me =D
 
-" Pathogen
-call pathogen#runtime_append_all_bundles()
-call pathogen#helptags()
+" Use Vim settings, rather than Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+set backspace=2         " same as :set backspace=indent,eol,start
 
-" Enable filetype stuff
-filetype on
-filetype plugin on
-filetype plugin indent on
+" Activate pathogen
+call pathogen#infect()
 
-set cindent
-set autoindent                  " Copy indent from current line when starting a new line.
-set backspace=indent,eol,start  " makes backspace key more powerful.
-
-set showmatch                   " do not show matching brackets by flickering
-set incsearch                   " shows the match while typing
-set hlsearch                    " highlight found searches
-set smartcase                   " Turn of smart searching
-set ignorecase                  " Search incase sensitive
-
-set ruler                       " show line and column number
-set wildmenu					" command line tab completion, more superior
-set wildmode=list:longest,list:full	  " type :h wildmode for more info about list options
-set wildignore+=*.o,*.obj,.git,*.rbc,*.pyc,.DS_Store,*.jpg,*.png,*.gif,*.bak,*.exe,*.so,*.la,*.out,*.pyc,*.swp,*/.build
-
-set completeopt=menuone,longest,preview
-
-set history=100                 " Number of lines of command line history.
-set noerrorbells                " No beeps
-set gdefault                    " Use 'g' flag by default with :s/foo/bar/.
-set number                      " Show line numbers
-
-set ttyscroll=0                 " Turn off scrolling (this is faster).
-set ttyfast                     " We have a fast terminal connection.
-set showcmd                     " Show me what I'm typing
-set showmode                    " Show current mode.
-set encoding=utf-8              " Set default encoding to UTF-8
-set autowrite                   " Automatically save before :next, :make etc.
-set cmdheight=1                 " The commandbar height
-set laststatus=2
-
-set splitright                  " Split vertical windows right to the current windows
-set splitbelow                  " Split horizontal windows below to the current windows
-set noswapfile                  " Don't use swapfile
-
-set mat=5                       " show matching brackets for 0.5 seconds
-set wrap                        " word wrap
-set lazyredraw                  " the screen will not be redrawn while executing macros, registers
-
-" Prefer unix over windows over os9 formats
-set fileformats=unix,dos,mac
-
-" C/C++ stuff, tabs are four columns wide. Each indentation level is one tab
+" Indentation settings
+set autoindent          " Always set auto-indenting on
+set smartindent
 set tabstop=4
-set softtabstop=4
 set shiftwidth=4
-set expandtab 
 
-" Enable undo even if the file is closed
-set undofile
-set undodir=/tmp
-set nobackup            " Dont create annoying backup files
+set viminfo='20,\"50    " Read/write a .viminfo file -- limit to only 50
+set history=100         " Keep 100 lines of command history
+set ruler               " Show the cursor position all the time
+set showmode            " Show current mode
+
+" Set syntax coloring on
+syntax enable
+filetype plugin indent on
+set grepprg=grep\ -nH\ $*
 
 
-" make vim save and load the folding of the document each time it loads"
-" also places the cursor in the last place that it was left."
+" Search options
+set showmatch
+set incsearch           " shows matching while typing
+set ignorecase
+set hlsearch            " highlight found searches
+
+" Encoding options
+set encoding=utf8
+set tenc=utf8
+set fileencoding=utf8
+set fileformats=unix,dos,mac    " Prefer unix over windows over os9 formats
+
+
+
+set wrap                " wrap long lines to windows width by word
+set number              " show line numbers
+set linebreak
+set laststatus=2
+set showcmd             " shows what you are typing as a command
+set wildmenu            " Make the command-line completion better
+set showfulltag         " When completing by tag, show the whole tag, not just the function name
+set autoread            " Automatically read a file that has changed on disk
+set splitright          " Split vertical windows right to the current windows
+set splitbelow          " Split horizontal windows below to the current windows
+set mat=5               " show matching for an half sec
+
+set mouse=a             " Use mouse wheel to scroll up/down
+
+" Vi is cooler with these settings :)
+set ts=4                " Default tab space
+set shiftwidth=2
+set sta
+set sts=4
+set expandtab
+
+
+" Theme settings
+set background=dark
+colorscheme elflord
+set modelines=0
+
+let g:clipbrdDefaultReg = '+'
+
+" The following changes the default filetype back to 'tex':
+let g:tex_flavor='latex'
+
+" make vim save and load the folding of the document each time it loads
+" also places the cursor in the last place that it was left.
 set viewdir=/tmp
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
 
-" -[ FileTypes ]-
-" mail
-autocmd FileType mail,human set formatoptions+=t textwidth=80
+" Activate gundo
+set undofile
+set undodir=/tmp
+set nobackup            " Don't create anoying backup files
 
-" markdown
-autocmd FileType markdown set textwidth=80
-autocmd FileType markdown set nocindent "Wraping fix for braces
-autocmd FileType markdown set expandtab "Use spaces for tabs, a requirement by markdown
-autocmd FileType markdown set shiftwidth=4
-
-" Python stuff
-autocmd FileType python let python_highlight_all = 1
-autocmd FileType python let python_slow_sync = 1
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set expandtab shiftwidth=4 softtabstop=4
-autocmd FileType python set completeopt=menu
-autocmd FileType python set expandtab              " Tabs are converted to spaces
-
-autocmd BufRead,BufNewFile *.go set filetype=go
-autocmd BufRead,BufNewFile *.coffee set expandtab shiftwidth=2 softtabstop=2
-
-"Quickfix window
-" Automatically open, but do not go to (if there are errors) the quickfix /
-" location list window, or close it when is has become empty.
-"
-" Note: Must allow nesting of autocmds to enable any customizations for
-" quickfix buffers.  Note: Normally, :cwindow jumps to the quickfix window if
-" the command opens it (but not if it's already open). However, as part of the
-" autocmd, this doesn't seem to happen.
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
-
-" We'll use it for settings that should apply only to one OS (like Linux)
-let os=substitute(system('uname'), '\n', '', '')
-
-" Multibyte reading of utf-16
-if has("multi_byte")
-  if &termencoding == ""
-    let &termencoding = &encoding
-  endif
-  set encoding=utf-8
-  setglobal fileencoding=utf-8
-  "setglobal bomb
-  set fileencodings=ucs-bom,utf-8,latin1
-endif
-
-" ------------------------------------------"
-" Color and Syntax                          "
-" ------------------------------------------"
-
-syntax enable                   " syntax formatting for languages
-set background=dark
-colorscheme molokai
-
-" No toolbars, menu or scrollbars in the GUI
-if has('gui')
-    if os == 'Darwin' || os == 'Mac'
-        set guifont=Source\ Code\ Pro\ for\ Powerline:h13
-        set clipboard+=unnamed
-    endif
-	set vb t_vb=
-	set guioptions-=m  "no menu
-	set guioptions-=T  "no toolbar
-	set guioptions-=l
-	set guioptions-=L
-	set guioptions-=r  "no scrollbar
-	set guioptions-=R
-end
-
-" Color Column (only on insert)
-if exists("&colorcolumn")
-    autocmd InsertEnter * set colorcolumn=80
-    autocmd InsertLeave * set colorcolumn=""
-endif
+" Cool tab completion stuff
+set wildmenu
+set wildmode=list:longest,full
 
 
 
-" ------------------------------------------"
-" Mappings                                  "
-" ----------------------------------------- "
+" #####################
+" # Mappings
+" ####################
 
-" This comes first, because we have mappings that depend on leader
-" With a map leader it's possible to do extra key combinations
-" i.e: <leader>w saves the current file
+" This comes first, because there are mappings that depend on leader
 let mapleader = ","
 let g:mapleader = ","
 
-" Some useful quickfix shortcuts
-":cc      see the current error
-":cn      next error
-":cp      previous error
-":clist   list all errors
-map <C-n> :cn<CR>
-map <C-m> :cp<CR>
+nmap <C-N><C-N> :set invnumber <CR>     " CTRL+N x2 shows line numbers
 
-"This trigger takes advantage of the fact that the quickfix window can be
-"easily distinguished by its file-type, qf. The wincmd J command is equivalent
-"to the Ctrl+W, Shift+J shortcut telling Vim to move a window to the very
-"bottom (see :help :wincmd and :help ^WJ).
-autocmd FileType qf wincmd J
-
-"Dont show me any output when I build something
-"Because I am using quickfix for errors
-nmap <leader>m :make<CR><enter>
-
-" Quick go run for current file
-nmap <leader>r :!go run %<CR>
-
-" Remove search hilight
-nnoremap <leader><space> :nohlsearch<CR>
-
-" I hate you F1, you are useless
-" Act like a ESC
-inoremap <F1> <ESC>
-nnoremap <F1> <ESC>
-vnoremap <F1> <ESC>
-
-" Better split switching
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" Fast saving
-nmap <leader>w :w!<cr>
-nmap <leader>q :q!<cr>
-nmap <leader>wq :wq!<cr>
-
-" Save fold settings, open/close folds easily with spacebar
-nnoremap <space> zz
-
-" Move up and down on splitted lines (on small width screens)
-map <Up> gk
-map <Down> gj
+" Enables to move upward/downward at long lines
+map <UP> gk
+map <DOWN> gj
 map k gk
 map j gj
 
-" Make mouse middle click paste without formatting it
-map <MouseMiddle> <Esc>"*p
+" Tab controls
+nmap <leader>n :tabprevious<CR>
+nmap <leader>m :tabnext<CR>
+nmap <leader>t :tabnew<CR>
 
-" Just go out in insert mode
-imap jk <ESC>l
 
-" Search mappings: These will make it so that going to the next one in a
-" search will center on the line it's found in.
-map N Nzz
-map n nzz
-
-" Open help window always vertically
-nmap zH :vert he
-
-" Set working directory
-nnoremap <leader>. :lcd %:p:h<CR>
-
-" save it with sudo again
-nnoremap <leader>ss :w !sudo tee %<CR>  
-
-" trim all whitespaces away
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>       
-
-" Start scrolling three lines before the horizontal window border
-set scrolloff=3
-
-" Act like D and C
-nnoremap Y y$
-
-"This will look in the current directory for "tags", and work up the tree
-"towards root until one is found. IOW, you can be anywhere in your source tree
-"instead of just the root of it.
-"set showfulltag
-"set tags=./tags;/
-"map <leader>s <C-W><C-I><CR>
-"" Open the definition in a new tab
-"map <leader>t :tab split<CR>:exec("tag ".expand("<cword>"))<CR>zz
-"" Open the definition in a vertical split
-"map <leader>v :vsp <CR>:exec("tag ".expand("<cword>"))<CR>zz
-
-" ----------------------------------------- "
-" Plugin configs
-" ----------------------------------------- "
-
-" ack 
-let g:ackprg="ack -H -a -i --column"
-noremap <Leader>a :LAck! <cword><cr>
-
-" ctrlp
-let g:ctrlp_cmd = 'CtrlP'			" Open it in most recenlty used mode (the most important option everyone want!)
-let g:ctrlp_working_path_mode = 'ra'	" search for nearest ancestor like .git, .hg, and the directory of the current file
-let g:ctrlp_match_window_bottom = 1		" show the match window at the top of the screen:
-let g:ctrlp_max_height = 10				" maxiumum height of match window
-let g:ctrlp_switch_buffer = 'Et'		" jump to a file if its open already
-let g:ctrlp_use_caching = 1				" enable caching
-let g:ctrlp_cache_dir = $HOME.'/.cache/ctrlp' "chache dir
-let g:ctrlp_clear_cache_on_exit = 0     "donr clear cache everytime we exit vim
-let g:ctrlp_show_hidden = 1				" show me dotfiles
-let g:ctrlp_mruf_max = 250				" number of recenytly opened files
-nmap <C-p> :CtrlP /Users/fatih/Code/<CR>
-"let g:ctrlp_open_new_file = 'v'     "open in a new vertical split
-
-" vim-coffee-plugin
-let g:coffee_compiler = '/usr/local/share/npm/bin/coffee'
-let g:coffee_linter = '/usr/local/share/npm/bin/coffeelint'
-let g:coffee_lint_options = '-f lint.json'
-let g:ctrlp_extensions = ['tag', 'buffertag', 'line', 'changes', 'mixed']
+" force close/write and close
+nmap <leader>q :q!<CR>
+nmap <leader>wq :wq!<CR>
+nmap <leader>w :w<CR>
 
 " vim-nerdtree
-nmap <leader>n :NERDTreeToggle <CR>
+nmap <leader>cc NERDComToggleComment
+nmap <leader>uu NERDComUncommentLine 
 
-let NERDTreeChDirMode=1
-if os == 'Darwin' || os == 'Mac'
-	let g:NERDTreeDirArrows=0 " Fix a bug on mac
-endif
-let NERDTreeIgnore=['\~$', '\.pyc$', '\.pyo$', '\.class$', 'pip-log\.txt$', '\.o$'] "
-
-" open a NERDTree automatically when vim starts up if no files were specified
-autocmd vimenter * if !argc() | NERDTree | endif 
-
-" autoclose
-let g:AutoClosePairs_add = "\" '"  "add quotes to autoclose plugin
-let g:AutoClosePairs_del = "{"     "remove quotes to autoclose plugin
-
-" tagbar
-nmap <leader>b :TagbarToggle<CR>
-let g:tagbar_autofocus = 1
-
-" gundo
-nnoremap <leader>g :GundoToggle<CR>
-
-" easymotion
-let g:EasyMotion_mapping_w = '<leader>k'
-
-" gist-vim
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
-let g:gist_show_privates = 1
-
-if os == 'Darwin' || os == 'Mac'
-    let g:gist_clip_command = 'pbcopy'
-endif
-if os == 'Linux'
-    let g:gist_clip_command = 'xclip -selection clipboard'
-endif
-
-" powerline
-let g:Powerline_symbols = 'fancy'
-" gist-vim
-let g:gist_detect_filetype = 1
-let g:gist_open_browser_after_post = 1
-let g:gist_show_privates = 1
-
-if os == 'Darwin' || os == 'Mac'
-    let g:gist_clip_command = 'pbcopy'
-endif
-if os == 'Linux'
-    let g:gist_clip_command = 'xclip -selection clipboard'
-endif
-
-" powerline
-let g:Powerline_symbols = 'fancy'
+" Substitution function for Turkish characters with Latex Turkish characters
+function! Tr_char_to_latex()
+    :%s/ğ\|Ğ\|ç\|Ç\|ş\|Ş\|ü\|Ü\|ö\|Ö\|ı\|İ/\={'ğ':'\u{g}','Ğ':'\u{G}','ç':'\c{c}','Ç':'\c{C}','ş':'\c{s}','Ş':'\c{S}','ü':'\"{u}','Ü':'\"{U}','ö':'\"{o}','Ö':'\"{O}','ı':'{\i}','İ':'\.{I}'}[submatch(0)]/g
+endfunction

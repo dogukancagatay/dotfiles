@@ -35,3 +35,5 @@
 	helper = osxkeychain
 [github]
 	user = dogukancagatay 
+[push]
+	default = matching

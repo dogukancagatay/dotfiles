@@ -15,6 +15,7 @@ set backspace=2         " same as :set backspace=indent,eol,start
 " Activate pathogen
 call pathogen#infect()
 
+
 " Indentation settings
 set autoindent          " Always set auto-indenting on
 set smartindent
@@ -30,6 +31,7 @@ set showmode            " Show current mode
 syntax enable
 filetype plugin indent on
 set grepprg=grep\ -nH\ $*
+set term=screen-256color        " Powerline doesn't show colors on status bar otherwise
 
 
 " Search options
@@ -93,7 +95,9 @@ set nobackup            " Don't create anoying backup files
 set wildmenu
 set wildmode=list:longest,full
 
-
+" Enable powerline fancy symbols
+" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10 
+let g:Powerline_symbols = 'fancy'
 
 " #####################
 " # Mappings

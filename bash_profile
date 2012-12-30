@@ -84,6 +84,11 @@ if [ -f ~/programs/.bashrc ]; then
     . ~/programs/.bashrc 
 fi
 
+if [ -f ~/.bash_profile2 ]; then
+  source ~/.bash_profile2
+fi
+
+
 ## application aliases
 # subversion
 alias svn_extract_dot_files='find . -name .svn -print0 | xargs -0 rm -rf'
@@ -99,7 +104,4 @@ if [ $(uname -s) = "Darwin" ]; then
   alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 fi
 
-if [ -f ~/.bash_profile2 ]; then
-  source ~/.bash_profile2
-fi
 

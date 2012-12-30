@@ -5,6 +5,6 @@ all:
 	[ -f ~/.bash_profile ] || ln -s $(PWD)/bash_profile ~/.bash_profile
 
 clean:
-	rm -f ~/.vimrc ~/.vim ~/.gitconfig ~/.bash_profile
+	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.bash_profile
 
 .PHONY: all

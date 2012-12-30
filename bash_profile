@@ -99,3 +99,7 @@ if [ $(uname -s) = "Darwin" ]; then
   alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 fi
 
+if [ -f ~/.bash_profile2 ]; then
+  source ~/.bash_profile2
+fi
+

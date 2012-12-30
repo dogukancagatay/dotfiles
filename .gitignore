@@ -1,2 +1,4 @@
-vim/.netrwhist
-.netrwhist
+.vimlog
+.DS_Store
+*.swp
+*.idea

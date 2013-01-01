@@ -1,10 +1,10 @@
 ## Personal dotfiles
 
-My personal dotfiles that I'm using on Mac OSX and Linux.
+My personal dotfiles and configuration files which I use on Mac OSX and Linux.
 
 Install:
 
-    git clone https://github.com/dogukancagatay/dotfiles.git
+    git clone --recursive https://github.com/dogukancagatay/dotfiles.git
     cd dotfiles
     make
 

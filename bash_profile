@@ -8,10 +8,7 @@ alias vi="vim"
 #vi-compatiple command line
 set -o vi
 
-#platform independents
 CLICOLOR=1
-alias d="ls --color"
-alias dir="ls --color"
 alias ls="ls --color=auto"
 alias ll="ls --color -lha"
 alias la="ls --color -la"
@@ -24,7 +21,30 @@ alias cls="clear"
 alias cd..="cd .."
 alias rm="rm -i"
 alias mv="mv -i"
-alias cp="cp -i"
+alias cp="cp -i" 
+alias ln="ln -i"
+alias wget='wget -c'
+
+
+alias diff='colordiff'      # install colordiff package :)
+alias path='echo -e ${PATH//:/\\n}'
+alias ping='ping -c 5'
+alias ports='netstat -tulanp tcp'
+
+
+# generate random password
+# taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
+genpasswd() { 
+  local l=$1
+  [ "$l" == "" ] && l=16
+  tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
+} 
+
+# kill process with a name
+killl(){
+  local p=$1
+  ps aux | grep ${p} | awk '{print $2}' | xargs -Ixx kill -9 xx
+}
 
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then

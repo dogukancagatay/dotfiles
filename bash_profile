@@ -30,6 +30,7 @@ alias diff='colordiff'      # install colordiff package :)
 alias path='echo -e ${PATH//:/\\n}'
 alias ping='ping -c 5'
 alias ports='netstat -tulanp tcp'
+alias bc='bc -l' # run with standard math lib
 
 
 # generate random password

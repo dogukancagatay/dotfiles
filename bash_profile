@@ -33,19 +33,6 @@ alias ports='netstat -tulanp tcp'
 alias bc='bc -l' # run with standard math lib
 
 
-# generate random password
-# taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
-genpasswd() { 
-  local l=$1
-  [ "$l" == "" ] && l=16
-  tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
-} 
-
-# kill process with a name
-killl(){
-  local p=$1
-  ps aux | grep ${p} | awk '{print $2}' | xargs -Ixx kill -9 xx
-}
 
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
@@ -125,4 +112,35 @@ if [ $(uname -s) = "Darwin" ]; then
   alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 fi
 
+
+## Functions
+
+# generate random password
+# taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
+genpasswd() { 
+  local l=$1
+  [ "$l" == "" ] && l=16
+  tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
+} 
+
+# kill process with a name
+killl(){
+  local p=$1
+  ps aux | grep ${p} | awk '{print $2}' | xargs -Ixx kill -9 xx
+}
+
+#ssh-copy-id for mac
+if [ $(uname -s) = "Darwin" ]; then
+    ssh-copy-id(){
+        if [ $# -eq 1 ]; then
+            if [ -f ~/.ssh/id_rsa.pub ]; then
+                cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+            fi
+
+            if [ -f ~/.ssh/id_dsa.pub ]; then
+                cat ~/.ssh/id_dsa.pub | ssh $1 "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+            fi
+        fi
+    }
+fi
 

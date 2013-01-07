@@ -63,8 +63,8 @@ set mat=5               " show matching for an half sec
 set mouse=a             " Use mouse wheel to scroll up/down
 
 " Vi is cooler with these settings :)
-set ts=4                " Default tab space
-set shiftwidth=2
+" set ts=4                " Default tab space
+" set shiftwidth=2
 set sta
 set sts=4
 set expandtab
@@ -97,7 +97,7 @@ set wildmode=list:longest,full
 
 " Enable powerline fancy symbols
 " set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10 
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
 
 " #####################
 " # Mappings

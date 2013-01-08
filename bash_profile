@@ -114,7 +114,7 @@ fi
 #git
 alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset%C(yellow)%d%Creset %C(dim white)%an%Creset' --abbrev-commit --date=relative --date-order --all" # pretty log 
 #detailed commit logs
-alias gitcilg'git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
+alias gitcilg='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 
 
 ## Functions

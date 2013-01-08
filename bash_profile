@@ -4,7 +4,6 @@ PS1='\[\033[1m\]\u@\h \[\033[0;31m\]\W \$ \[\033[00m\]'
 # set editor as vim
 EDITOR='vim'
 alias vi="vim"
-
 #vi-compatiple command line
 set -o vi
 
@@ -112,9 +111,13 @@ if [ $(uname -s) = "Darwin" ]; then
   alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 fi
 
+#git
+alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset%C(yellow)%d%Creset %C(dim white)%an%Creset' --abbrev-commit --date=relative --date-order --all" # pretty log 
+#detailed commit logs
+alias gitcilg'git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
+
 
 ## Functions
-
 # generate random password
 # taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
 genpasswd() { 
@@ -144,3 +147,7 @@ if [ $(uname -s) = "Darwin" ]; then
     }
 fi
 
+#plain git diff
+git_diff() {
+  git diff -w "$@" | vim -R -
+}

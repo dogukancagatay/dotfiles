@@ -108,6 +108,7 @@ let mapleader = ","
 let g:mapleader = ","
 
 nmap <C-N><C-N> :set invnumber <CR>     " CTRL+N x2 shows line numbers
+map <leader>ss :setlocal spell! <CR><CR>
 
 " Enables to move upward/downward at long lines
 map <UP> gk
@@ -123,7 +124,9 @@ nmap <leader>t :tabnew<CR>
 
 " force close/write and close
 nmap <leader>q :q!<CR>
+nmap <leader>qa :qa!<CR>
 nmap <leader>wq :wq!<CR>
+nmap <leader>wqa :wqa!<CR>
 nmap <leader>w :w<CR>
 
 " vim-nerdtree

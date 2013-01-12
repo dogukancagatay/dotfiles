@@ -2,10 +2,14 @@
 PS1='\[\033[1m\]\u@\h \[\033[0;31m\]\W \$ \[\033[00m\]'
 
 # set editor as vim
-EDITOR='vim'
+export EDITOR="vim"
+export PAGER="less"
 alias vi="vim"
 #vi-compatiple command line
 set -o vi
+
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
 
 CLICOLOR=1
 alias ls="ls --color=auto"

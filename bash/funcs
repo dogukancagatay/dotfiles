@@ -1,0 +1,97 @@
+# ------------------------------------------------------------ #
+# simple bench
+# taken from bitbucket.org/TigersWay
+# ------------------------------------------------------------ #
+
+bench() {
+    if [ $(uname -s) = "Linux" ]; then
+        cpu=$( awk -F': +' '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
+        cores=$( awk '/cpu MHz/ {cores++} END {print cores}' /proc/cpuinfo )
+        freq=$( awk -F': +' '/cpu MHz/ {freq=$2} END {print freq}' /proc/cpuinfo )
+        echo "  CPU Model : $cpu"
+        echo "      Cores : $cores"
+        echo "  Frequency : $freq MHz"
+
+        ram=$( free -m | awk 'NR==2 {print $2}' )
+        swap=$( free -m | awk 'NR==4 {print $2}' )
+        echo "        Ram : $ram MB"
+        echo "       Swap : $swap MB"
+
+        echo "           ---"
+
+        #io=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync && rm -f test_$$ ) 2>&1 | awk -F', ' '{io=$NF} END {print io}' )
+        writeio=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k conv=fdatasync ) 2>&1 | awk -F', ' '{io=$NF} END {print io}' )
+        readio=$( ( dd if=test_$$ of=/dev/null bs=64k count=16k && rm -f test_$$ ) 2>&1 | awk -F', ' '{io=$NF} END {print io}' )
+        cachefly=$( wget -O /dev/null http://cachefly.cachefly.net/100mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 " " $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+        up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; gsub(/^ +|, *$/,""); print}' )
+        echo "     Uptime : $up"
+        echo "  I/O write speed : $writeio"
+        echo "  I/O read speed : $readio"
+        echo "   CacheFly : $cachefly "
+    fi
+
+    if [ $(uname -s) = "Darwin" ]; then
+        cpu=$( system_profiler SPHardwareDataType | grep -i "processor name" | awk '{print $3" "$4" "$5}' )
+        cores=$( system_profiler SPHardwareDataType | grep -i "total number of cores" | awk '{print $5}' )
+        freq=$( system_profiler SPHardwareDataType | grep -i "processor speed" | awk '{print $3" "$4}' )
+        macmodel=$( system_profiler SPHardwareDataType | grep -i "model identifier" | awk '{print $3}' )
+        echo "  Mac Model : $macmodel"
+        echo "  CPU Model : $cpu"
+        echo "      Cores : $cores"
+        echo "  Frequency : $freq"
+
+        ram=$( system_profiler SPHardwareDataType | grep -i "memory" | awk '{print $2" "$3}' )
+        echo "        Ram : $ram"
+        echo "           ---"
+
+        writeio=$( ( dd if=/dev/zero of=test_$$ bs=64k count=16k ) 2>&1 | awk -F', ' '{io=$NF} END {print io}' )
+        readio=$( ( dd if=test_$$ of=/dev/null bs=64k count=16k && rm -rf test_$$ ) 2>&1 | awk -F', ' '{io=$NF} END {print io}' )
+        cachefly=$( wget -O /dev/null http://cachefly.cachefly.net/10mb.test 2>&1 | awk '/\/dev\/null/ {speed=$3 " " $4} END {gsub(/\(|\)/,"",speed); print speed}' )
+        up=$( uptime | awk '{ $1=$2=$(NF-6)=$(NF-5)=$(NF-4)=$(NF-3)=$(NF-2)=$(NF-1)=$NF=""; gsub(/^ +|, *$/,""); print}' )
+        echo "     Uptime : $up"
+        echo "  I/O write speed : $writeio"
+        echo "  I/O read speed : $readio"
+        echo "   CacheFly : $cachefly "
+    fi
+}
+
+# ------------------------------------------------------------ #
+# random password generator
+# taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
+# ------------------------------------------------------------ #
+genpasswd() { 
+  local l=$1
+  [ "$l" == "" ] && l=16
+  tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
+} 
+
+# ------------------------------------------------------------ #
+# process kill with a name
+# ------------------------------------------------------------ #
+killl(){
+  local p=$1
+  ps aux | grep ${p} | awk '{print $2}' | xargs -Ixx kill -9 xx
+}
+# ------------------------------------------------------------ #
+# ssh-copy-id for macs
+# ------------------------------------------------------------ #
+if [ $(uname -s) = "Darwin" ]; then
+    ssh-copy-id(){
+        if [ $# -eq 1 ]; then
+            if [ -f ~/.ssh/id_rsa.pub ]; then
+                cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+            fi
+
+            if [ -f ~/.ssh/id_dsa.pub ]; then
+                cat ~/.ssh/id_dsa.pub | ssh $1 "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
+            fi
+        fi
+    }
+fi
+
+# ------------------------------------------------------------ #
+# plain git diff on vim
+# ------------------------------------------------------------ #
+git_diff() {
+  git diff -w "$@" | vim -R -
+}

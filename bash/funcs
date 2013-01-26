@@ -95,3 +95,19 @@ fi
 git_diff() {
   git diff -w "$@" | vim -R -
 }
+
+# ------------------------------------------------------------ #
+# easy tar bz2 gz compress 
+# ------------------------------------------------------------ #
+comptarbz() {
+    tar -cjvf "$1.tar.bz2" $1
+}
+exttarbz() {
+    tar -xjvf $1
+}
+comptargz() {
+    tar -czvf "$1.tar.bz2" $1
+}
+exttargz() {
+    tar -xzvf $1
+}

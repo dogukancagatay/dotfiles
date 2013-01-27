@@ -27,6 +27,9 @@ alias mv="mv -i"
 alias cp="cp -i" 
 alias ln="ln -i"
 alias wget='wget -c'
+alias df='df -h'
+alias du='du -h'
+alias free='free -m'
 
 
 alias diff='colordiff'      # install colordiff package :)

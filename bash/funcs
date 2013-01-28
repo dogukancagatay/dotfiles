@@ -99,15 +99,17 @@ git_diff() {
 # ------------------------------------------------------------ #
 # easy tar bz2 gz compress 
 # ------------------------------------------------------------ #
-comptarbz() {
-    tar -cjvf "$1.tar.bz2" $1
+compresstarbz() {
+    $dir=${1%*/}
+    tar -cjvf "$dir"".tar.bz2" $1
 }
-exttarbz() {
+xtarbz() {
     tar -xjvf $1
 }
-comptargz() {
-    tar -czvf "$1.tar.bz2" $1
+ctargz() {
+    $dir=${1%*/}
+    tar -czvf "$dir"".tar.gz" $1
 }
-exttargz() {
+xtargz() {
     tar -xzvf $1
 }

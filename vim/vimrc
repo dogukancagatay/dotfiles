@@ -133,6 +133,9 @@ nmap <leader>w :w<CR>
 nmap <leader>cc NERDComToggleComment
 nmap <leader>uu NERDComUncommentLine 
 
+map <F9> :w<CR>:set makeprg=javac\ %<CR>:make<CR>
+map <F10> :!echo %\|awk -F. '{print $1}'\|xargs java<CR>
+
 " Substitution function for Turkish characters with Latex Turkish characters
 function! Tr_char_to_latex()
     :%s/ğ\|Ğ\|ç\|Ç\|ş\|Ş\|ü\|Ü\|ö\|Ö\|ı\|İ/\={'ğ':'\u{g}','Ğ':'\u{G}','ç':'\c{c}','Ç':'\c{C}','ş':'\c{s}','Ş':'\c{S}','ü':'\"{u}','Ü':'\"{U}','ö':'\"{o}','Ö':'\"{O}','ı':'{\i}','İ':'\.{I}'}[submatch(0)]/g

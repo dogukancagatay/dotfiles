@@ -1,5 +1,5 @@
 # Compiled source #
-###################
+#####################
 *.com
 *.class
 *.dll
@@ -8,7 +8,7 @@
 *.so
 
 # Packages #
-############
+#####################
 # it's better to unpack these files and commit the raw source
 # git has its own built in compression methods
 *.7z
@@ -26,6 +26,27 @@
 *.sql
 *.sqlite
 
+# VIM
+#####################
+.*.swo
+.*.swp
+
+# NetBeans
+#####################
+nbproject
+
+# CVS
+#####################
+.cvsignore
+
+# TextMate
+#####################
+.#*
+
+# PHP Storm, other java IDE's
+#####################
+.idea
+
 # OS generated files #
 ######################
 .DS_Store
@@ -33,6 +54,6 @@
 ._*
 .Spotlight-V100
 .Trashes
-Icon?
+#Icon?
 ehthumbs.db
 Thumbs.db

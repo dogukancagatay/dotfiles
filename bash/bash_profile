@@ -88,6 +88,16 @@ if [ $(uname -s) = "Linux" ]; then
   fi
 fi
 
+## On Arch Linux it is installed under /usr/etc/
+if [ $(uname -s) = "Linux" ]; then
+  # autojump for bash (ubuntu package)
+  if [ -f /usr/etc/profile.d/autojump.bash ]; then
+      . /usr/etc/profile.d/autojump.bash
+      export AUTOJUMP_IGNORE_CASE=1
+      export AUTOJUMP_KEEP_SYMLINKS=1
+  fi
+fi
+
 # Add home bin to the PATH
 if [ -d ~/bin ]; then
   export PATH=$PATH:$HOME"/bin"

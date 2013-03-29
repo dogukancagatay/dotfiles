@@ -22,6 +22,13 @@ set smartindent
 set tabstop=4
 set shiftwidth=4
 
+" Vi is cooler with these settings :)
+" set ts=4                " Default tab space
+" set shiftwidth=2
+set sta
+set sts=4
+set expandtab
+
 set viminfo='20,\"50    " Read/write a .viminfo file -- limit to only 50
 set history=100         " Keep 100 lines of command history
 set ruler               " Show the cursor position all the time
@@ -62,13 +69,6 @@ set mat=5               " show matching for an half sec
 
 set mouse=a             " Use mouse wheel to scroll up/down
 
-" Vi is cooler with these settings :)
-" set ts=4                " Default tab space
-" set shiftwidth=2
-set sta
-set sts=4
-set expandtab
-
 
 " Theme settings
 set background=dark
@@ -107,8 +107,11 @@ set wildmode=list:longest,full
 let mapleader = ","
 let g:mapleader = ","
 
-nmap <C-N><C-N> :set invnumber <CR>     " CTRL+N x2 shows line numbers
-map <leader>ss :setlocal spell! <CR><CR>
+" CTRL+N x2 shows line numbers
+nmap <C-N><C-N> :set invnumber <CR>     
+
+" open spell checker
+map <leader>ss :setlocal spell! <CR><CR> 
 
 " Enables to move upward/downward at long lines
 map <UP> gk
@@ -121,6 +124,8 @@ nmap <leader>n :tabprevious<CR>
 nmap <leader>m :tabnext<CR>
 nmap <leader>t :tabnew<CR>
 
+" CtrlP leader mappings
+nmap <leader>f :CtrlPMixed<CR>
 
 " force close/write and close
 nmap <leader>q :q!<CR>
@@ -133,6 +138,7 @@ nmap <leader>w :w<CR>
 nmap <leader>cc NERDComToggleComment
 nmap <leader>uu NERDComUncommentLine 
 
+" compile and run single java files
 map <F9> :w<CR>:set makeprg=javac\ %<CR>:make<CR>
 map <F10> :!echo %\|awk -F. '{print $1}'\|xargs java<CR>
 

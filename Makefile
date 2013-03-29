@@ -3,10 +3,17 @@ all:
 	[ -f ~/.vimrc ] || ln -s $(PWD)/vim/vimrc ~/.vimrc
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.gitignore_global ] || ln -s $(PWD)/gitignore_global ~/.gitignore_global
-	[ -f ~/.bash_profile ] || ln -s $(PWD)/bash/bash_profile ~/.bash_profile
 	[ -d ~/.bash ] || ln -s $(PWD)/bash ~/.bash
+	#[ -f ~/.bash_profile ] || ln -s $(PWD)/bash/bash_profile ~/.bash_profile
+	[ -f ~/.bash_profile ] || ln -s ~/.bash/bash_profile ~/.bash_profile
+	[ -d ~/.zsh/ ] || ln -s $(PWD)/zsh/ ~/.zsh
+	[ -f ~/.zshrc ] || ln -s ~/.zsh/zshrc ~/.zshrc
+	[ -d ~/.oh-my-zsh/ ] || ln -s ~/.zsh/oh-my-zsh ~/.oh-my-zsh
+	[ -d ~/.oh-my-zsh/custom/plugins ] || ln -s ~/.zsh/plugins ~/.oh-my-zsh/custom/plugins
+	[ -f ~/.oh-my-zsh/themes/pardus.zsh-theme ] || ln -s ~/.zsh/pardus.zsh-theme ~/.oh-my-zsh/themes/pardus.zsh-theme
+	
 
 clean:
-	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash
+	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash ~/.zsh ~/.zshrc ~/.oh-my-zsh 
 
 .PHONY: all

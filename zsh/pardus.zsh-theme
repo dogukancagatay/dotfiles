@@ -1,6 +1,8 @@
 #pardus zsh-theme as an extension to alanpeabody theme
 #screenshot is @ 
-local user='%{$fg[gray]%}%n@%{$fg[white]%}%m%{$reset_color%}'
+#ugrey="%{^[[033;1m%}"
+local user='%{$FG[255]%}%n@%m%{$reset_color%}'
+#local user='%{$fg[white]%}%n@%{$fg[white]%}%m%{$reset_color%}'
 local pwd='%{$fg[red]%}%~%{$reset_color%}'
 local type='%{$fg[red]%}%(!.#.$)%{$reset_color%}'
 

@@ -1,0 +1,56 @@
+alias vi="vim"
+alias ls="ls --color=auto"
+alias ll="ls --color -lha"
+alias la="ls --color -la"
+alias grep="grep --color"
+alias pgrep="pgrep -f"
+alias pkill="pkill -f"
+alias egrep="egrep --color"
+alias fgrep="fgrep --color"
+alias cls="clear"
+alias cd..="cd .."
+alias rm="rm -i"
+alias mv="mv -i"
+alias cp="cp -i" 
+alias ln="ln -i"
+alias wget='wget -c'
+alias df='df -h'
+alias du='du -h'
+alias free='free -m'
+
+
+alias diff='colordiff'      # install colordiff package :)
+alias path='echo -e ${PATH//:/\\n}'
+alias ping='ping -c 5'
+alias ports='netstat -tulanp tcp'
+alias bc='bc -l' # run with standard math lib
+
+# tree command
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
+
+
+## Mac OS X dependent settings
+if [ $(uname -s) = "Darwin" ]; then
+  ## normal setup mysql aliases for MAC OS X
+  alias mysql=/usr/local/mysql/bin/mysql
+  alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+fi
+
+## application aliases
+# subversion
+alias svn_extract_dot_files='find . -name .svn -print0 | xargs -0 rm -rf'
+alias svnadd='svn st | grep "^\?" | awk "{print \$2}" | xargs svn add'
+alias svndiff='svn diff --diff-cmd ~/bin/svnvimdiff'
+
+#additional alias
+alias chmox='chmod +x'
+
+
+##git
+# pretty log
+alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset%C(yellow)%d%Creset %C(dim white)%an%Creset' --abbrev-commit --date=relative --date-order --all" 
+
+#detailed commit logs
+alias gitcilg='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
+
+

@@ -103,13 +103,22 @@ comptarbz() {
     dir=${1%*/}
     tar -cjvf "$dir"".tar.bz2" $1
 }
+
 exttarbz() {
     tar -xjvf $1
 }
+
 comptargz() {
     dir=${1%*/}
     tar -czvf "$dir"".tar.gz" $1
 }
+
 exttargz() {
     tar -xzvf $1
+}
+
+hbase-shell() {
+    if [ -f ~/programs/hbase/bin/hbase ]; then
+        ~/programs/hbase/bin/hbase shell
+    fi
 }

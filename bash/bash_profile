@@ -1,46 +1,27 @@
 #PS1='\u@\h:\W \$ '
 PS1='\[\033[1m\]\u@\h \[\033[0;31m\]\W \$ \[\033[00m\]'
 
+# set SHELL
+if [ -f /opt/local/bin/bash ]; then
+    SHELL="/opt/local/bin/bash"
+else
+    SHELL="/bin/bash"
+fi
+
+export SHELL=/bin/bash
+
 # set editor as vim
 export EDITOR="vim"
 export PAGER="less"
-alias vi="vim"
+
 #vi-compatiple command line
 set -o vi
 
+# Language preferences
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
 CLICOLOR=1
-alias ls="ls --color=auto"
-alias ll="ls --color -lha"
-alias la="ls --color -la"
-alias grep="grep --color"
-alias pgrep="pgrep -f"
-alias pkill="pkill -f"
-alias egrep="egrep --color"
-alias fgrep="fgrep --color"
-alias cls="clear"
-alias cd..="cd .."
-alias rm="rm -i"
-alias mv="mv -i"
-alias cp="cp -i" 
-alias ln="ln -i"
-alias wget='wget -c'
-alias df='df -h'
-alias du='du -h'
-alias free='free -m'
-
-
-alias diff='colordiff'      # install colordiff package :)
-alias path='echo -e ${PATH//:/\\n}'
-alias ping='ping -c 5'
-alias ports='netstat -tulanp tcp'
-alias bc='bc -l' # run with standard math lib
-
-# tree command
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-
 
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
@@ -65,7 +46,7 @@ if [ $(uname -s) = "Darwin" ]; then
 
   # autojump for bash installed with macports
   if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
-      . /opt/local/etc/profile.d/autojump.sh
+      source /opt/local/etc/profile.d/autojump.sh
       export AUTOJUMP_IGNORE_CASE=1
       export AUTOJUMP_KEEP_SYMLINKS=1
   fi
@@ -75,9 +56,6 @@ if [ $(uname -s) = "Darwin" ]; then
       . /opt/local/etc/bash_completion
   fi
 
-  ## mysql aliases for MAC OS X
-  alias mysql=/usr/local/mysql/bin/mysql
-  alias mysqladmin=/usr/local/mysql/bin/mysqladmin
 fi
 
 
@@ -89,6 +67,7 @@ if [ $(uname -s) = "Linux" ]; then
       export AUTOJUMP_IGNORE_CASE=1
       export AUTOJUMP_KEEP_SYMLINKS=1
   fi
+
   ## On Arch Linux it is installed under /usr/etc/
   if [ -f /usr/etc/profile.d/autojump.bash ]; then
       . /usr/etc/profile.d/autojump.bash
@@ -102,35 +81,17 @@ if [ -d ~/bin ]; then
   export PATH=$PATH:$HOME"/bin"
 fi
 
-
-
-## application aliases
-# subversion
-alias svn_extract_dot_files='find . -name .svn -print0 | xargs -0 rm -rf'
-alias svnadd='svn st | grep "^\?" | awk "{print \$2}" | xargs svn add'
-alias svndiff='svn diff --diff-cmd ~/bin/svnvimdiff'
-
-#additional alias
-alias chmox='chmod +x'
-
-
-##git
-# pretty log
-alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%Creset%C(yellow)%d%Creset %C(dim white)%an%Creset' --abbrev-commit --date=relative --date-order --all" 
-
-#detailed commit logs
-alias gitcilg='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
-
-# addtional program settings
-if [ -f ~/programs/.bashrc ]; then
-    . ~/programs/.bashrc 
-fi
-
+# Computer specific additional profile options
 if [ -f ~/.bash_profile2 ]; then
-  source ~/.bash_profile2
+    source ~/.bash_profile2
 fi
 
 ## Functions
 if [ -f ~/.bash/funcs ]; then
     source ~/.bash/funcs
+fi
+
+# addtional program settings
+if [ -f ~/programs/.bashrc ]; then
+    source ~/programs/.bashrc 
 fi

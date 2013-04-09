@@ -53,4 +53,3 @@ alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%C
 #detailed commit logs
 alias gitcilg='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 
-

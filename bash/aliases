@@ -53,3 +53,6 @@ alias gitlg="git log --graph --pretty=format:'%Cred%h%Creset - %s %Cgreen(%cr)%C
 #detailed commit logs
 alias gitcilg='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 
+#clean screen
+alias cleanscreen="screen -ls | tail -n +2 | head -n -2 | awk '{print $1}'| xargs -Ixx screen -S xx -X quit"
+

@@ -1,0 +1,10 @@
+# Do not display the startup message
+startup_message off
+
+# tab_number* hostname time date
+caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %{=b BW} %H %{-} %c %d/%m/%Y"
+shelltitle ""
+autodetach on
+
+# make the shell as bash for loading .bashrc
+shell -/bin/bash

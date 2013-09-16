@@ -10,6 +10,10 @@ fi
 
 export SHELL=/bin/bash
 
+# make bash history unlimited
+export HISTFILESIZE=
+export HISTSIZE=
+
 # set editor as vim
 export EDITOR="vim"
 export PAGER="less"

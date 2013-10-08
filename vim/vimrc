@@ -103,6 +103,9 @@ set wildmode=list:longest,full
 " # Mappings
 " ####################
 
+"Getting sudo rights from inside of vim
+command W w !sudo tee % >/dev/null
+
 " This comes first, because there are mappings that depend on leader
 let mapleader = ","
 let g:mapleader = ","

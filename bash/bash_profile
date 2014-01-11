@@ -56,10 +56,9 @@ if [ $(uname -s) = "Darwin" ]; then
   fi
 
   # bash_completion installation installed with macports
-  if [ -f /opt/local/etc/bash_completion ]; then
-      . /opt/local/etc/bash_completion
-  fi
-
+    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
+        source /opt/local/etc/profile.d/bash_completion.sh
+    fi
 fi
 
 

@@ -12,9 +12,10 @@ all:
 	[ -d ~/.oh-my-zsh/custom/plugins ] || ln -s ~/.zsh/plugins ~/.oh-my-zsh/custom/plugins
 	[ -f ~/.oh-my-zsh/themes/pardus.zsh-theme ] || ln -s ~/.zsh/pardus.zsh-theme ~/.oh-my-zsh/themes/pardus.zsh-theme
 	[ -f ~/.screenrc ] || ln -s $(PWD)/screenrc ~/.screenrc
+	[ -d ~/.aria2 ] || ln -s $(PWD)/aria2 ~/.aria2
 	
 
 clean:
-	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash ~/.zsh ~/.zshrc ~/.oh-my-zsh ~/.screenrc
+	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash ~/.zsh ~/.zshrc ~/.oh-my-zsh ~/.screenrc ~/.aria2
 
 .PHONY: all

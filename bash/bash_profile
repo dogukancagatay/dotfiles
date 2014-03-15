@@ -30,15 +30,16 @@ CLICOLOR=1
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
 
-  # QT bin on Mac OS X
+  # QT bin on osx
   #PATH=$PATH:$HOME"/QtSDK/Desktop/Qt/474/gcc/bin"
 
-  # latex binaries
-  PATH=$PATH:"/usr/local/texlive/2012/bin/x86_64-darwin"
-
+  # php installation configuration from http://php-osx.liip.ch/
+  if [ -f /usr/local/php5/bin ]; then
+      PATH="/usr/local/php5/bin":$PATH
+  fi
 
   # gnubin utils installed with macports
-  export PATH="/opt/local/libexec/gnubin:$PATH"
+  PATH="/opt/local/libexec/gnubin:$PATH"
 
   # gnuplot
   export GNUTERM=X11
@@ -59,6 +60,14 @@ if [ $(uname -s) = "Darwin" ]; then
     if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
         source /opt/local/etc/profile.d/bash_completion.sh
     fi
+
+    #for git
+    if [ -f /opt/local/share/git-core/contrib/completion/git-completion.bash ]; then
+        source /opt/local/share/git-core/contrib/completion/git-completion.bash
+    fi
+
+    # Setting PATH for Python 2.7 installed from python.org
+    PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 fi
 
 
@@ -79,17 +88,12 @@ if [ $(uname -s) = "Linux" ]; then
   fi
 fi
 
-# Add home bin to the PATH
+## Add home bin to the PATH
 if [ -d ~/bin ]; then
   export PATH=$PATH:$HOME"/bin"
 fi
 
-# Computer specific additional profile options
-if [ -f ~/.bash/aliases ]; then
-    source ~/.bash/aliases
-fi
-
-# Computer specific additional profile options
+## Computer specific additional profile options
 if [ -f ~/.bash_profile2 ]; then
     source ~/.bash_profile2
 fi
@@ -99,7 +103,14 @@ if [ -f ~/.bash/funcs ]; then
     source ~/.bash/funcs
 fi
 
-# addtional program settings
+## Aliases
+if [ -f ~/.bash/aliases ]; then
+    source ~/.bash/aliases
+fi
+
+## addtional program settings
 if [ -f ~/programs/.bashrc ]; then
     source ~/programs/.bashrc 
 fi
+
+export PATH

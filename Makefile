@@ -18,4 +18,4 @@ all:
 clean:
 	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash ~/.zsh ~/.zshrc ~/.oh-my-zsh ~/.screenrc ~/.aria2
 
-.PHONY: all
+.PHONY: all clean

@@ -1,6 +1,6 @@
 ## Personal dotfiles
 
-My personal dotfiles and configuration files which I use on Mac OSX and Linux.
+My personal configuration files I use on Mac OSX and Linux.
 
 Install:
 

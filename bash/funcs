@@ -60,9 +60,50 @@ bench() {
 # taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
 # ------------------------------------------------------------ #
 genpasswd() { 
-  local l=$1
-  [ "$l" == "" ] && l=16
-  tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
+    local l=""
+    local type="A-Za-z0-9_*?.\)\(\!\%\&\$\#\@-"
+    #if [[ "$#" -eq "1" ]]; then
+    for var in "$@"
+    do
+        if [[  -z "`echo $var | tr -d "[:digit:]"`" ]]; then
+            l=$var
+        else
+            case "$var" in
+            "lower" | "low")
+                type="a-z0-9_*?.\)\(\!\%\&\$\#\@-"
+                ;;
+            "lownum")
+                type="a-z0-9"
+                ;;
+            "num")
+                type="0-9"
+                ;;
+            "uplow")
+                type="A-Za-z0-9"
+                ;;
+            "-h" | "--help")
+                echo "Usage: genpasswd [arg1] [arg2]"
+                echo "------------------------------"
+                echo "arg1 and arg2 are optional and interchangeable. Default length=16 type=all"
+                echo ""
+                echo "a number : the length of the generated password"
+                echo "low      : lowercase alpha-numeric password with special characters."
+                echo "lownum   : lowercase alpha-numeric password."
+                echo "uplow    : uppercase and lowercase alpha-numeric password."
+                echo "num      : numeric password."
+                echo "all | *  : uppercase, lowercase alpha-numeric password with special characters."
+                l=0
+                ;;
+            *)
+                type="A-Za-z0-9_*?.\)\(\!\%\&\$\#\@-"
+                ;;
+            esac
+        fi
+   done 
+
+    [ "$l" == "" ] && l=16
+    #tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
+    tr -dc ${type} < /dev/urandom | head -c ${l} | xargs 
 } 
 
 # ------------------------------------------------------------ #

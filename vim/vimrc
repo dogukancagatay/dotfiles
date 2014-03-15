@@ -15,7 +15,6 @@ set backspace=2         " same as :set backspace=indent,eol,start
 " Activate pathogen
 call pathogen#infect()
 
-
 " Indentation settings
 set autoindent          " Always set auto-indenting on
 set smartindent
@@ -40,7 +39,6 @@ filetype plugin indent on
 set grepprg=grep\ -nH\ $*
 set term=screen-256color        " Powerline doesn't show colors on status bar otherwise
 
-
 " Search options
 set showmatch
 set incsearch           " shows matching while typing
@@ -52,8 +50,6 @@ set encoding=utf8
 set tenc=utf8
 set fileencoding=utf8
 set fileformats=unix,dos,mac    " Prefer unix over windows over os9 formats
-
-
 
 set wrap                " wrap long lines to windows width by word
 set number              " show line numbers
@@ -69,11 +65,16 @@ set mat=5               " show matching for an half sec
 
 set mouse=a             " Use mouse wheel to scroll up/down
 
-
 " Theme settings
 set background=dark
 colorscheme elflord
 set modelines=0
+
+" crontab fix for Mac OS X
+if $VIM_CRONTAB == "true"
+    set nobackup
+    set nowritebackup
+endif
 
 let g:clipbrdDefaultReg = '+'
 

@@ -13,10 +13,10 @@
     lol = log --graph --decorate --pretty=oneline --abbrev-commit
     lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
     ls = ls-files
-# Show files ignored by git:
-    ign = ls-files -o -i --exclude-standard
+    ign = ls-files -o -i --exclude-standard     # Show files ignored by git:
     unstage = reset HEAD --
     last = log -1 HEAD
+    up = pull --recurse-submodules
 
 [color]
     ui = auto

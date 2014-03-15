@@ -26,15 +26,18 @@ alias ping='ping -c 5'
 alias ports='netstat -tulanp tcp'
 alias bc='bc -l' # run with standard math lib
 
-# tree command
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
-
 
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
-  ## normal setup mysql aliases for MAC OS X
-  alias mysql=/usr/local/mysql/bin/mysql
-  alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+    ## aliases for mysql installed from mysql.com 
+    alias mysql=/usr/local/mysql/bin/mysql
+    alias mysqladmin=/usr/local/mysql/bin/mysqladmin
+
+    ## Vim crontab fix
+    alias crontab="VIM_CRONTAB=true crontab"
+    
+    # tree command
+    alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'"
 fi
 
 ## application aliases
@@ -45,7 +48,6 @@ alias svndiff='svn diff --diff-cmd ~/bin/svnvimdiff'
 
 #additional alias
 alias chmox='chmod +x'
-
 
 ##git
 # pretty log

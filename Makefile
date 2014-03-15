@@ -4,8 +4,8 @@ all:
 	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
 	[ -f ~/.gitignore_global ] || ln -s $(PWD)/gitignore_global ~/.gitignore_global
 	[ -d ~/.bash ] || ln -s $(PWD)/bash ~/.bash
-	#[ -f ~/.bash_profile ] || ln -s $(PWD)/bash/bash_profile ~/.bash_profile
 	[ -f ~/.bash_profile ] || ln -s ~/.bash/bash_profile ~/.bash_profile
+	[ -f ~/.bash_profile2 ] || ln -s ~/.bash/bash_profile2 ~/.bash_profile2
 	[ -d ~/.zsh/ ] || ln -s $(PWD)/zsh/ ~/.zsh
 	[ -f ~/.zshrc ] || ln -s ~/.zsh/zshrc ~/.zshrc
 	[ -d ~/.oh-my-zsh/ ] || ln -s ~/.zsh/oh-my-zsh ~/.oh-my-zsh
@@ -16,6 +16,6 @@ all:
 	
 
 clean:
-	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash ~/.zsh ~/.zshrc ~/.oh-my-zsh ~/.screenrc ~/.aria2
+	rm -rf ~/.vimrc ~/.vim ~/.gitconfig ~/.gitignore_global ~/.bash_profile ~/.bash_profile2 ~/.bash ~/.zsh ~/.zshrc ~/.oh-my-zsh ~/.screenrc ~/.aria2
 
 .PHONY: all

@@ -59,3 +59,5 @@ alias gitcilg='git log --pretty=format:"[%h] %ae, %ar: %s" --stat'
 #clean screen
 alias cleanscreen="screen -ls | tail -n +2 | head -n -2 | awk '{print $1}'| xargs -Ixx screen -S xx -X quit"
 
+# pastebin-cl private paste alias
+alias pastebincl='pastebincl -p'

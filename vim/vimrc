@@ -5,7 +5,7 @@
 " Tidy up by Onur Küçük <onur@pardus.org.tr>
 " Some good stuff is taken from Derek Wyatt's Vim Configuration <http://github.com/derekwyatt>
 " Some more good stuff is taken from Fatih Arslan's Vim Configuration <http://github.com/farslan>
-" And bundled by me =D
+" And bundled, modified by Doğukan Çağatay <http://github.com/dogukancagatay> 
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -66,8 +66,15 @@ set mat=5               " show matching for an half sec
 set mouse=a             " Use mouse wheel to scroll up/down
 
 " Theme settings
+" colorscheme elflord
+colorscheme monokai 
 set background=dark
-colorscheme elflord
+if has("gui_running")
+    let g:molokai_original = 1
+else
+    let g:rehash256 = 1
+endif
+
 set modelines=0
 
 " crontab fix for Mac OS X

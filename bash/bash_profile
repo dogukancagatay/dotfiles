@@ -30,33 +30,33 @@ CLICOLOR=1
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
 
-  # QT bin on osx
-  #PATH=$PATH:$HOME"/QtSDK/Desktop/Qt/474/gcc/bin"
+    # QT bin on osx
+    #PATH=$PATH:$HOME"/QtSDK/Desktop/Qt/474/gcc/bin"
 
-  # php installation configuration from http://php-osx.liip.ch/
-  if [ -f /usr/local/php5/bin ]; then
-      PATH="/usr/local/php5/bin":$PATH
-  fi
+    # php installation configuration from http://php-osx.liip.ch/
+    if [ -e /usr/local/php5/bin ]; then
+        PATH="/usr/local/php5/bin":$PATH
+    fi
 
-  # gnubin utils installed with macports
-  PATH="/opt/local/libexec/gnubin:$PATH"
+    # gnubin utils installed with macports
+    PATH="/opt/local/libexec/gnubin:$PATH"
 
-  # gnuplot
-  export GNUTERM=X11
+    # gnuplot
+    export GNUTERM=X11
 
-  # MacPorts Installer addition 
-  export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-  export MANPATH="$MANPATH:/opt/local/share/man"
-  export INFOPATH="$INFOPATH:/opt/local/share/info"
+    # MacPorts Installer addition 
+    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+    export MANPATH="$MANPATH:/opt/local/share/man"
+    export INFOPATH="$INFOPATH:/opt/local/share/info"
 
-  # autojump for bash installed with macports
-  if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
-      source /opt/local/etc/profile.d/autojump.sh
-      export AUTOJUMP_IGNORE_CASE=1
-      export AUTOJUMP_KEEP_SYMLINKS=1
-  fi
+    # autojump for bash installed with macports
+    if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
+        source /opt/local/etc/profile.d/autojump.sh
+        export AUTOJUMP_IGNORE_CASE=1
+        export AUTOJUMP_KEEP_SYMLINKS=1
+    fi
 
-  # bash_completion installation installed with macports
+    # bash_completion installation installed with macports
     if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
         source /opt/local/etc/profile.d/bash_completion.sh
     fi
@@ -73,19 +73,25 @@ fi
 
 ## Other 
 if [ $(uname -s) = "Linux" ]; then
-  # autojump for bash (ubuntu package)
-  if [ -f /usr/share/autojump/autojump.bash ]; then
-      . /usr/share/autojump/autojump.bash
-      export AUTOJUMP_IGNORE_CASE=1
-      export AUTOJUMP_KEEP_SYMLINKS=1
-  fi
 
-  ## On Arch Linux it is installed under /usr/etc/
-  if [ -f /usr/etc/profile.d/autojump.bash ]; then
-      . /usr/etc/profile.d/autojump.bash
-      export AUTOJUMP_IGNORE_CASE=1
-      export AUTOJUMP_KEEP_SYMLINKS=1
-  fi
+    # autojump for bash (ubuntu package)
+    if [ -f /usr/share/autojump/autojump.bash ]; then
+        . /usr/share/autojump/autojump.bash
+        export AUTOJUMP_IGNORE_CASE=1
+        export AUTOJUMP_KEEP_SYMLINKS=1
+    fi
+
+    ## On Arch Linux it is installed under /usr/etc/
+    if [ -f /usr/etc/profile.d/autojump.bash ]; then
+        . /usr/etc/profile.d/autojump.bash
+        export AUTOJUMP_IGNORE_CASE=1
+        export AUTOJUMP_KEEP_SYMLINKS=1
+    fi
+
+    #if reboot required tell me (Ubuntu)
+    if [ -f /var/run/reboot-required ]; then
+        echo 'Reboot required'
+    fi 
 fi
 
 ## Add home bin to the PATH

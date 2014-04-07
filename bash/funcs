@@ -135,24 +135,30 @@ git_diff() {
 # ------------------------------------------------------------ #
 
 extract () {
-   if [ -f $1 ] ; then
-       case $1 in
-	*.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
-	*.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
-	*.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
-	*.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
-	*.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
-	*.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
-	*.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
-	*.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
-	*.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
-	*.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
-	*.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
-	*.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
-	*)		echo "don't know how to extract '$1'..." ;;
-       esac
-   else
-       echo "'$1' is not a valid file!"
+    if [ -z "$1" ]; then
+    # display usage if no parameters given
+        echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
+    else
+        if [ -f $1 ] ; then
+            case $1 in
+                *.tar.bz2)	tar xvjf $1 && cd $(basename "$1" .tar.bz2) ;;
+                *.tar.gz)	tar xvzf $1 && cd $(basename "$1" .tar.gz) ;;
+                *.tar.xz)	tar Jxvf $1 && cd $(basename "$1" .tar.xz) ;;
+                *.bz2)		bunzip2 $1 && cd $(basename "$1" /bz2) ;;
+                *.rar)		unrar x $1 && cd $(basename "$1" .rar) ;;
+                *.gz)		gunzip $1 && cd $(basename "$1" .gz) ;;
+                *.tar)		tar xvf $1 && cd $(basename "$1" .tar) ;;
+                *.tbz2)		tar xvjf $1 && cd $(basename "$1" .tbz2) ;;
+                *.tgz)		tar xvzf $1 && cd $(basename "$1" .tgz) ;;
+                *.zip)		unzip $1 && cd $(basename "$1" .zip) ;;
+                *.Z)		uncompress $1 && cd $(basename "$1" .Z) ;;
+                *.7z)		7z x $1 && cd $(basename "$1" .7z) ;;
+                *.xz)       unxz $1  && cd $(basename "$1" .xz) ;;
+                *)		echo "don't know how to extract '$1'..." ;;
+            esac
+       else
+           echo "'$1' is not a valid file!"
+       fi
    fi
 }
 
@@ -180,13 +186,12 @@ if [ $(uname -s) = "Darwin" ]; then
 # open rtmp stream with rtmpdump and vlc
 # ------------------------------------------------------------ #
     function rtmp_open() {
-                rtmpdump -r $1 --quiet | /Applications/VLC.app/Contents/MacOS/VLC fd://0 --playlist-autostart
+        rtmpdump -r $1 --quiet | /Applications/VLC.app/Contents/MacOS/VLC fd://0 --playlist-autostart
     }
 
 # ------------------------------------------------------------ #
 # MacPorts functions 
 # ------------------------------------------------------------ #
-
     function macports_cleanup() {
         sudo port uninstall leaves
         sudo port uninstall inactive
@@ -195,16 +200,15 @@ if [ $(uname -s) = "Darwin" ]; then
 fi #finish mac specific part
 
 # ------------------------------------------------------------ #
-# resource ~/.bash_profile
+# re-source ~/.bash_profile
 # ------------------------------------------------------------ #
-
 function resource() {
     source ~/.bash_profile
 }
+
 # ------------------------------------------------------------ #
 # youtube-dl download with aria2
 # ------------------------------------------------------------ #
-
 function youtube-dl-aria2() {
     ydata="$(youtube-dl --get-filename --get-url "$@")"
     filename="$(echo "$ydata" | tail -n 1)"
@@ -217,4 +221,55 @@ function youtube-dl-aria2() {
 # ------------------------------------------------------------ #
 function shorten-url(){
     curl -s https://www.googleapis.com/urlshortener/v1/url -H 'Content-Type: application/json' -d "{\"longUrl\": \"$1\"}" | grep id | awk -F\" '{print $4}'
+}
+
+# ------------------------------------------------------------ #
+# Gzip compressing function
+# ------------------------------------------------------------ #
+function compress-gz(){
+    local filename="$(basename "$1")".tar.gz
+
+    if [ -d "$1" ]; then
+        tar czf "$filename" "$1"
+    else
+        echo "No such directory."
+    fi
+}
+
+# ------------------------------------------------------------ #
+# Bzip2 compressing function
+# ------------------------------------------------------------ #
+function compress-bz2(){
+    local filename="$(basename "$1")".tar.bz2
+
+    if [ -d "$1" ]; then
+        tar cjf "$filename" "$1"
+    else
+        echo "No such directory."
+    fi
+}
+# ------------------------------------------------------------ #
+# Swap 2 filenames around, if they exist (from Uzi's bashrc)
+# ------------------------------------------------------------ #
+function swap(){
+    local TMPFILE=tmp.$$
+
+    [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
+    [ ! -e $1 ] && echo "swap: $1 does not exist" && return 1
+    [ ! -e $2 ] && echo "swap: $2 does not exist" && return 1
+
+    mv "$1" $TMPFILE
+    mv "$2" "$1"
+    mv $TMPFILE "$2"
+}
+
+# ------------------------------------------------------------ #
+# Find a file with pattern in name
+# ------------------------------------------------------------ #
+findit (){
+   if [ -z ${1} ];then
+      echo "Please pass an argument that you want to search for"
+   else
+      find . -iname "*$1*" -print
+   fi
 }

@@ -145,6 +145,9 @@ nmap <leader>wq :wq!<CR>
 nmap <leader>wqa :wqa!<CR>
 nmap <leader>w :w<CR>
 
+" toggle paste mode with leader + p
+nmap <leader>p :set paste!<CR>
+
 " vim-nerdtree
 nmap <leader>cc NERDComToggleComment
 nmap <leader>uu NERDComUncommentLine 
@@ -157,3 +160,4 @@ map <F10> :!echo %\|awk -F. '{print $1}'\|xargs java<CR>
 function! Tr_char_to_latex()
     :%s/ğ\|Ğ\|ç\|Ç\|ş\|Ş\|ü\|Ü\|ö\|Ö\|ı\|İ/\={'ğ':'\u{g}','Ğ':'\u{G}','ç':'\c{c}','Ç':'\c{C}','ş':'\c{s}','Ş':'\c{S}','ü':'\"{u}','Ü':'\"{U}','ö':'\"{o}','Ö':'\"{O}','ı':'{\i}','İ':'\.{I}'}[submatch(0)]/g
 endfunction
+

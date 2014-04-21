@@ -71,6 +71,11 @@ if [ $(uname -s) = "Darwin" ]; then
       export AUTOJUMP_IGNORE_CASE=1
       export AUTOJUMP_KEEP_SYMLINKS=1
   fi
+
+  if [ -d /opt/local/share/zsh/site-functions ]; then
+      fpath=(/opt/local/share/zsh/site-functions $fpath) 
+  fi
+
 fi
 
 ## autojump for linux is not tested

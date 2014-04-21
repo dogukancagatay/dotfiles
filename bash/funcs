@@ -273,3 +273,12 @@ findit (){
       find . -iname "*$1*" -print
    fi
 }
+# ------------------------------------------------------------ #
+# Download multiple links with aria2 by simply pasting links 
+# ------------------------------------------------------------ #
+aria2c-multi(){
+    local OUT="$(mktemp)"
+    vim -c 'startinsert' "$OUT"
+    $(which aria2c) -i "$OUT"
+    rm -rf "$OUT"
+}

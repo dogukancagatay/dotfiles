@@ -49,6 +49,9 @@ if [ $(uname -s) = "Darwin" ]; then
     export MANPATH="$MANPATH:/opt/local/share/man"
     export INFOPATH="$INFOPATH:/opt/local/share/info"
 
+    # Java home
+    export JAVA_HOME=$(/usr/libexec/java_home)
+
     # autojump for bash installed with macports
     if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
         source /opt/local/etc/profile.d/autojump.sh

@@ -220,7 +220,16 @@ function youtube-dl-aria2() {
 # Google URL Shortener http://goo.gl/xwCNC
 # ------------------------------------------------------------ #
 function shorten-url(){
-    curl -s https://www.googleapis.com/urlshortener/v1/url -H 'Content-Type: application/json' -d "{\"longUrl\": \"$1\"}" | grep id | awk -F\" '{print $4}'
+    if [ "$1"  == "-i" ]; then
+        if [[ -f "$2" ]]; then
+            for f in $(cat "$2")
+            do
+                curl -s https://www.googleapis.com/urlshortener/v1/url -H 'Content-Type: application/json' -d "{\"longUrl\": \"$f\"}" | grep id | awk -F\" '{print $4}'
+            done
+        fi
+    else
+        curl -s https://www.googleapis.com/urlshortener/v1/url -H 'Content-Type: application/json' -d "{\"longUrl\": \"$1\"}" | grep id | awk -F\" '{print $4}'
+    fi
 }
 
 # ------------------------------------------------------------ #

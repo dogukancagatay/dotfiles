@@ -161,3 +161,13 @@ function! Tr_char_to_latex()
     :%s/ğ\|Ğ\|ç\|Ç\|ş\|Ş\|ü\|Ü\|ö\|Ö\|ı\|İ/\={'ğ':'\u{g}','Ğ':'\u{G}','ç':'\c{c}','Ç':'\c{C}','ş':'\c{s}','Ş':'\c{S}','ü':'\"{u}','Ü':'\"{U}','ö':'\"{o}','Ö':'\"{O}','ı':'{\i}','İ':'\.{I}'}[submatch(0)]/g
 endfunction
 
+" Changes file encoding to utf-8 and file format to unix 
+function! Dos2unix()
+    :set fileformat=unix | set fileencoding=utf8 | %s///g
+endfunction
+
+" Fix for corrupted Turkish characters because of encoding changes
+function! Tr_char_fix()
+    :call Dos2unix() | %s/Ý\|ý\|Þ\|þ\|Ð\|ð/\={'ð':'ğ','Ð':'Ğ','þ':'ş','Þ':'Ş','ý':'ı','Ý':'İ'}[submatch(0)]/g
+endfunction
+

@@ -1,39 +1,44 @@
 [submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
+    path = vim/bundle/nerdcommenter
+    url = https://github.com/scrooloose/nerdcommenter.git
     ignore = dirty
 [submodule "vim/bundle/vim-powerline"]
-	path = vim/bundle/vim-powerline
-	url = https://github.com/Lokaltog/vim-powerline.git
+    path = vim/bundle/vim-powerline
+    url = https://github.com/Lokaltog/vim-powerline.git
     ignore = dirty
 [submodule "vim/bundle/gundo.vim"]
-	path = vim/bundle/gundo.vim
-	url = https://github.com/sjl/gundo.vim.git
+    path = vim/bundle/gundo.vim
+    url = https://github.com/sjl/gundo.vim.git
     ignore = dirty
 [submodule "vim/bundle/vim-autoclose"]
-	path = vim/bundle/vim-autoclose
+    path = vim/bundle/vim-autoclose
     url = https://github.com/Townk/vim-autoclose.git
     ignore = dirty
 [submodule "vim/bundle/ctrlp.vim"]
-	path = vim/bundle/ctrlp.vim
-	url = https://github.com/kien/ctrlp.vim.git
+    path = vim/bundle/ctrlp.vim
+    url = https://github.com/kien/ctrlp.vim.git
     ignore = dirty
 [submodule "vim/bundle/vim-markdown"]
-	path = vim/bundle/vim-markdown
-	url = https://github.com/tpope/vim-markdown.git
+    path = vim/bundle/vim-markdown
+    url = https://github.com/tpope/vim-markdown.git
     ignore = dirty
 [submodule "vim/bundle/vim-fugitive"]
-	path = vim/bundle/vim-fugitive
-	url = https://github.com/tpope/vim-fugitive.git
+    path = vim/bundle/vim-fugitive
+    url = https://github.com/tpope/vim-fugitive.git
     ignore = dirty
 [submodule "zsh/oh-my-zsh"]
-	path = zsh/oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
+    path = zsh/oh-my-zsh
+    url = https://github.com/robbyrussell/oh-my-zsh.git
     ignore = dirty
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
-	path = zsh/plugins/zsh-syntax-highlighting
-	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
+    path = zsh/plugins/zsh-syntax-highlighting
+    url = https://github.com/zsh-users/zsh-syntax-highlighting.git
     ignore = dirty
 [submodule "vim/bundle/MatchTag"]
-	path = vim/bundle/MatchTag
-	url = https://github.com/gregsexton/MatchTag.git
+    path = vim/bundle/MatchTag
+    url = https://github.com/gregsexton/MatchTag.git
+    ignore = dirty
+[submodule "vim/bundle/vim-script-runner"]
+    path = vim/bundle/vim-script-runner
+    url = https://github.com/ironcamel/vim-script-runner.git
+    ignore = dirty

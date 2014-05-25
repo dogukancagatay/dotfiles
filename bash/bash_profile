@@ -43,6 +43,11 @@ if [ $(uname -s) = "Darwin" ]; then
 
     # gnuplot
     export GNUTERM=X11
+    
+    #texlive 2013
+    PATH=/usr/local/texlive/2013/bin/x86_64-linux:~/bin:$PATH
+    MANPATH=/usr/local/texlive/2013/texmf-dist/doc/man:$MANPATH
+    INFOPATH=/usr/local/texlive/2013/texmf-dist/doc/info:$INFOPATH
 
     # MacPorts Installer addition 
     export PATH="/opt/local/bin:/opt/local/sbin:$PATH"

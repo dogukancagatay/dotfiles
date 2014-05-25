@@ -5,6 +5,11 @@ startup_message off
 caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %{=b BW} %H %{-} %c %d/%m/%Y"
 shelltitle ""
 autodetach on
+defutf8 on
 
 # make the shell as bash for loading .bashrc
-shell -/bin/bash
+shell -$SHELL
+
+# Make xterm scrolling work properly with screen.
+#termcapinfo xterm-256color|xterm-color|xterm|xterms|xs|rxvt ti@:te@
+termcapinfo * ti@:te@

@@ -236,9 +236,9 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>958 339 924 485 0 0 1920 1058 </string>
+	<string>496 233 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>162 91 640 451 0 0 1440 878 </string>
+	<string>254 124 640 451 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>602 282 655 451 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -786,7 +786,7 @@
 			<key>Scrollback Lines</key>
 			<integer>0</integer>
 			<key>Scrollback With Status Bar</key>
-			<false/>
+			<true/>
 			<key>Scrollback in Alternate Screen</key>
 			<true/>
 			<key>Selected Text Color</key>
@@ -1013,7 +1013,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-03-12T09:31:28Z</date>
+	<date>2014-05-20T19:01:12Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1042,8 +1042,8 @@
 	<false/>
 	<key>ToolbeltTools</key>
 	<array>
-		<string>Jobs</string>
 		<string>Paste History</string>
+		<string>Jobs</string>
 	</array>
 	<key>TripleClickSelectsFullWrappedLines</key>
 	<true/>
@@ -1058,7 +1058,7 @@
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
-	<string>Lucida Grande</string>
+	<string>.Lucida Grande UI</string>
 	<key>WindowNumber</key>
 	<false/>
 	<key>WindowStyle</key>
@@ -1070,6 +1070,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140112</string>
+	<string>1.0.0.20140421</string>
 </dict>
 </plist>

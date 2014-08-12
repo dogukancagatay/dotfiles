@@ -291,13 +291,16 @@ aria2c-multi(){
     $(which aria2c) -i "$OUT"
     rm -rf "$OUT"
 }
-
-
+# ------------------------------------------------------------ #
+# Change video/audio encoding and hardcode subtitles with ffmpeg 
+# ------------------------------------------------------------ #
 function ff(){
     ## Settings ###
     #
     VIDEO_CODEC="libx264"
     AUDIO_CODEC="libfdk_aac"
+
+    finished_dir="$HOME/down/finished"
     # 
     #
     ################
@@ -309,15 +312,14 @@ function ff(){
     dir="${fullpath:0:${#fullpath} - ${#filename}}"
     extension="${filename##*.}"
     filename="${filename%.*}"
-    finished_dir="$HOME/down/finished"
 
     #echo "filename = $filename"
     #echo "extension = $extension"
     #echo "dir = $dir"
 
-    #~/bin/ffmpeg -i Flight.2012.720p.BrRipx264.YIFY.mp4 -filter_complex subtitles=Flight.2012.720p.BrRipx264.YIFY.srt -vcodec libx264 -acodec aac -ac 2 -strict experimental Flight.2012.720p.BrRipx264.YIFY_sub.mp4
+    #ffmpeg -i aaa.mp4 -filter_complex subtitles=aaa.srt -vcodec libx264 -acodec aac -ac 2 -strict experimental aaa_sub.mp4
 
-    # -vcodec libx264 -acodec aac -ac 2 -strict experimental Flight.2012.720p.BrRipx264.YIFY_sub.mp4"
+    # -vcodec libx264 -acodec aac -ac 2 -strict experimental aaa_sub.mp4"
 
     command="-i $fullpath"
 
@@ -333,11 +335,11 @@ function ff(){
         command="$command"" $finished_dir/$dir""$filename".mp4
     fi
 
-    #echo "Command:"
-    echo "~/bin/ffmpeg $command"
-    #~/bin/ffmpeg " $command"
+    echo "ffmpeg $command"
 }
-
+# ------------------------------------------------------------ #
+# Change text file encoding to UTF-8 
+# ------------------------------------------------------------ #
 function fromLatin1ToUtf8(){
     #iconv -f iso-8859-1 -t UTF-8 "$1" > "$1".utf8; mv -f "$1".utf8 "$1"
     for ARG in "$@"
@@ -345,7 +347,9 @@ function fromLatin1ToUtf8(){
         iconv -f iso-8859-1 -t UTF-8 "$ARG" > "$ARG".utf8; mv -f "$ARG".utf8 "$ARG"
     done
 }
-
+# ------------------------------------------------------------ #
+# Change new lines to from dos to unix type 
+# ------------------------------------------------------------ #
 function fromDosToUnix(){
     for ARG in "$@"
     do

@@ -291,3 +291,65 @@ aria2c-multi(){
     $(which aria2c) -i "$OUT"
     rm -rf "$OUT"
 }
+
+
+function ff(){
+    ## Settings ###
+    #
+    VIDEO_CODEC="libx264"
+    AUDIO_CODEC="libfdk_aac"
+    # 
+    #
+    ################
+
+    #filename=$(basename "$1")
+    fullpath="$1"
+    filename="${fullpath##*/}" # Strip longest match of */ from start
+    #filename="${filename%.*}"
+    dir="${fullpath:0:${#fullpath} - ${#filename}}"
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+    finished_dir="$HOME/down/finished"
+
+    #echo "filename = $filename"
+    #echo "extension = $extension"
+    #echo "dir = $dir"
+
+    #~/bin/ffmpeg -i Flight.2012.720p.BrRipx264.YIFY.mp4 -filter_complex subtitles=Flight.2012.720p.BrRipx264.YIFY.srt -vcodec libx264 -acodec aac -ac 2 -strict experimental Flight.2012.720p.BrRipx264.YIFY_sub.mp4
+
+    # -vcodec libx264 -acodec aac -ac 2 -strict experimental Flight.2012.720p.BrRipx264.YIFY_sub.mp4"
+
+    command="-i $fullpath"
+
+    #echo -n "Cheking if subtitle exists..."
+    if [ -e "$dir""$filename".srt ]; then
+        #echo "yes"
+        command="$command"" -filter_complex subtitles=$dir$filename".srt
+        command="$command"" -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -ac 2 -strict experimental"
+        command="$command"" $dir""$filename""_sub".mp4
+    else
+        #echo "no"
+        command="$command"" -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -ac 2 -strict experimental"
+        command="$command"" $finished_dir/$dir""$filename".mp4
+    fi
+
+    #echo "Command:"
+    echo "~/bin/ffmpeg $command"
+    #~/bin/ffmpeg " $command"
+}
+
+function fromLatin1ToUtf8(){
+    #iconv -f iso-8859-1 -t UTF-8 "$1" > "$1".utf8; mv -f "$1".utf8 "$1"
+    for ARG in "$@"
+    do
+        iconv -f iso-8859-1 -t UTF-8 "$ARG" > "$ARG".utf8; mv -f "$ARG".utf8 "$ARG"
+    done
+}
+
+function fromDosToUnix(){
+    for ARG in "$@"
+    do
+        dos2unix "$ARG"
+    done
+}
+

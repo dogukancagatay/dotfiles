@@ -3,7 +3,7 @@
 # taken from bitbucket.org/TigersWay
 # ------------------------------------------------------------ #
 
-bench() {
+function bench() {
     if [ $(uname -s) = "Linux" ]; then
         cpu=$( awk -F': +' '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
         cores=$( awk '/cpu MHz/ {cores++} END {print cores}' /proc/cpuinfo )
@@ -54,12 +54,13 @@ bench() {
         echo "   CacheFly : $cachefly "
     fi
 }
+export -f bench
 
 # ------------------------------------------------------------ #
 # random password generator
 # taken from (http://bash.cyberciti.biz/guide/~/.bashrc)
 # ------------------------------------------------------------ #
-genpasswd() { 
+function genpasswd() { 
     local l=""
     local type="A-Za-z0-9_*?.\)\(\!\%\&\$\#\@-"
     #if [[ "$#" -eq "1" ]]; then
@@ -105,12 +106,13 @@ genpasswd() {
     #tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
     tr -dc ${type} < /dev/urandom | head -c ${l} | xargs 
 } 
+export -f genpasswd
 
 # ------------------------------------------------------------ #
 # ssh-copy-id for macs
 # ------------------------------------------------------------ #
 if [ $(uname -s) = "Darwin" ]; then
-    ssh-copy-id(){
+    function ssh-copy-id() {
         if [ $# -eq 1 ]; then
             if [ -f ~/.ssh/id_rsa.pub ]; then
                 cat ~/.ssh/id_rsa.pub | ssh $1 "mkdir ~/.ssh; cat >> ~/.ssh/authorized_keys"
@@ -121,20 +123,22 @@ if [ $(uname -s) = "Darwin" ]; then
             fi
         fi
     }
+    export -f ssh-copy-id
 fi
 
 # ------------------------------------------------------------ #
 # plain git diff on vim
 # ------------------------------------------------------------ #
-git_diff() {
+function git_diff() {
   git diff -w "$@" | vim -R -
 }
+export -f git_diff
 
 # ------------------------------------------------------------ #
 # easy extract 
 # ------------------------------------------------------------ #
 
-extract () {
+function extract() {
     if [ -z "$1" ]; then
     # display usage if no parameters given
         echo "Usage: extract <path/file_name>.<zip|rar|bz2|gz|tar|tbz2|tgz|Z|7z|xz|ex|tar.bz2|tar.gz|tar.xz>"
@@ -161,25 +165,28 @@ extract () {
        fi
    fi
 }
+export -f extract
 
 # ------------------------------------------------------------ #
 # open hbase-shell
 # ------------------------------------------------------------ #
-hbase-shell() {
+function hbase-shell() {
     if [ -f ~/programs/hbase/bin/hbase ]; then
         ~/programs/hbase/bin/hbase shell
     fi
 }
+export -f hbase-shell
 
 # ------------------------------------------------------------ #
 # location of given ip address on earth
 # ------------------------------------------------------------ #
-locateip() {
+function locateip() {
     echo "http://www.geobytes.com/IpLocator.htm?GetLocation&IpAddress=$1"
     if [ $(uname -s) = "Darwin" ]; then
         open "http://www.geobytes.com/IpLocator.htm?GetLocation&IpAddress=$1"
     fi
 }
+export -f locateip
 
 if [ $(uname -s) = "Darwin" ]; then
 # ------------------------------------------------------------ #
@@ -188,6 +195,7 @@ if [ $(uname -s) = "Darwin" ]; then
     function rtmp_open() {
         rtmpdump -r $1 --quiet | /Applications/VLC.app/Contents/MacOS/VLC fd://0 --playlist-autostart
     }
+    export -f rtmp_open
 
 # ------------------------------------------------------------ #
 # MacPorts functions 
@@ -196,6 +204,7 @@ if [ $(uname -s) = "Darwin" ]; then
         sudo port uninstall leaves
         sudo port uninstall inactive
     }
+    export -f macports_cleanup
 
 fi #finish mac specific part
 
@@ -205,6 +214,7 @@ fi #finish mac specific part
 function resource() {
     source ~/.bash_profile
 }
+export -f resource
 
 # ------------------------------------------------------------ #
 # youtube-dl download with aria2
@@ -215,11 +225,12 @@ function youtube-dl-aria2() {
     url="$(echo "$ydata" | head -n 1)"
     aria2c --out "$filename" "$url"
 }
+export -f youtube-dl-aria2
 
 # ------------------------------------------------------------ #
 # Google URL Shortener http://goo.gl/xwCNC
 # ------------------------------------------------------------ #
-function shorten-url(){
+function shorten-url() {
     if [ "$1"  == "-i" ]; then
         if [[ -f "$2" ]]; then
             for f in $(cat "$2")
@@ -231,11 +242,12 @@ function shorten-url(){
         curl -s https://www.googleapis.com/urlshortener/v1/url -H 'Content-Type: application/json' -d "{\"longUrl\": \"$1\"}" | grep id | awk -F\" '{print $4}'
     fi
 }
+export -f shorten-url
 
 # ------------------------------------------------------------ #
 # Gzip compressing function
 # ------------------------------------------------------------ #
-function compress-gz(){
+function compress-gz() {
     local filename="$(basename "$1")".tar.gz
 
     if [ -d "$1" ]; then
@@ -244,11 +256,12 @@ function compress-gz(){
         echo "No such directory."
     fi
 }
+export -f compress-gz
 
 # ------------------------------------------------------------ #
 # Bzip2 compressing function
 # ------------------------------------------------------------ #
-function compress-bz2(){
+function compress-bz2() {
     local filename="$(basename "$1")".tar.bz2
 
     if [ -d "$1" ]; then
@@ -257,10 +270,11 @@ function compress-bz2(){
         echo "No such directory."
     fi
 }
+export -f compress-bz2
 # ------------------------------------------------------------ #
 # Swap 2 filenames around, if they exist (from Uzi's bashrc)
 # ------------------------------------------------------------ #
-function swap(){
+function swap() {
     local TMPFILE=tmp.$$
 
     [ $# -ne 2 ] && echo "swap: 2 arguments needed" && return 1
@@ -271,23 +285,36 @@ function swap(){
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
+export -f swap
 
 # ------------------------------------------------------------ #
 # Find a file with pattern in name
 # ------------------------------------------------------------ #
-findit (){
+function findit() {
    if [ -z ${1} ];then
       echo "Please pass an argument that you want to search for"
    else
       find . -iname "*$1*" -print
    fi
 }
+export -f findit
+
 # ------------------------------------------------------------ #
 # Download multiple links with aria2 by simply pasting links 
 # ------------------------------------------------------------ #
-aria2c-multi(){
+function aria2c-multi() {
     local OUT="$(mktemp)"
     vim -c 'startinsert' "$OUT"
     $(which aria2c) -i "$OUT"
     rm -rf "$OUT"
 }
+export -f aria2c-multi
+
+# ------------------------------------------------------------ #
+# cut the extension from the file path 
+# ------------------------------------------------------------ #
+function get-filename() {
+    local file="$1"
+    echo "${file%.*}"
+}
+export -f get-filename

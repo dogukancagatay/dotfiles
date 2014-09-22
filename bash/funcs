@@ -1,4 +1,31 @@
 # ------------------------------------------------------------ #
+# exports the functions in this file 
+# ------------------------------------------------------------ #
+function export-functions() {
+    export -f bench
+    export -f genpasswd
+    export -f git_diff
+    export -f extract
+    export -f hbase-shell
+    export -f get-filename
+    export -f locateip
+    export -f compress-bz2
+    export -f swap
+    export -f findit
+    export -f aria2c-multi
+    export -f compress-gz
+    export -f shorten-url
+    export -f resource
+    export -f youtube-dl-aria2
+
+    if [ $(uname -s) = "Darwin" ]; then
+        export -f ssh-copy-id
+        export -f rtmp_open
+        export -f macports_cleanup
+    fi
+}
+
+# ------------------------------------------------------------ #
 # simple bench
 # taken from bitbucket.org/TigersWay
 # ------------------------------------------------------------ #
@@ -54,7 +81,6 @@ function bench() {
         echo "   CacheFly : $cachefly "
     fi
 }
-export -f bench
 
 # ------------------------------------------------------------ #
 # random password generator
@@ -106,7 +132,6 @@ function genpasswd() {
     #tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
     tr -dc ${type} < /dev/urandom | head -c ${l} | xargs 
 } 
-export -f genpasswd
 
 # ------------------------------------------------------------ #
 # ssh-copy-id for macs
@@ -123,7 +148,6 @@ if [ $(uname -s) = "Darwin" ]; then
             fi
         fi
     }
-    export -f ssh-copy-id
 fi
 
 # ------------------------------------------------------------ #
@@ -132,7 +156,6 @@ fi
 function git_diff() {
   git diff -w "$@" | vim -R -
 }
-export -f git_diff
 
 # ------------------------------------------------------------ #
 # easy extract 
@@ -165,7 +188,6 @@ function extract() {
        fi
    fi
 }
-export -f extract
 
 # ------------------------------------------------------------ #
 # open hbase-shell
@@ -175,7 +197,6 @@ function hbase-shell() {
         ~/programs/hbase/bin/hbase shell
     fi
 }
-export -f hbase-shell
 
 # ------------------------------------------------------------ #
 # location of given ip address on earth
@@ -186,7 +207,6 @@ function locateip() {
         open "http://www.geobytes.com/IpLocator.htm?GetLocation&IpAddress=$1"
     fi
 }
-export -f locateip
 
 if [ $(uname -s) = "Darwin" ]; then
 # ------------------------------------------------------------ #
@@ -195,7 +215,6 @@ if [ $(uname -s) = "Darwin" ]; then
     function rtmp_open() {
         rtmpdump -r $1 --quiet | /Applications/VLC.app/Contents/MacOS/VLC fd://0 --playlist-autostart
     }
-    export -f rtmp_open
 
 # ------------------------------------------------------------ #
 # MacPorts functions 
@@ -204,7 +223,6 @@ if [ $(uname -s) = "Darwin" ]; then
         sudo port uninstall leaves
         sudo port uninstall inactive
     }
-    export -f macports_cleanup
 
 fi #finish mac specific part
 
@@ -214,7 +232,6 @@ fi #finish mac specific part
 function resource() {
     source ~/.bash_profile
 }
-export -f resource
 
 # ------------------------------------------------------------ #
 # youtube-dl download with aria2
@@ -225,7 +242,6 @@ function youtube-dl-aria2() {
     url="$(echo "$ydata" | head -n 1)"
     aria2c --out "$filename" "$url"
 }
-export -f youtube-dl-aria2
 
 # ------------------------------------------------------------ #
 # Google URL Shortener http://goo.gl/xwCNC
@@ -242,7 +258,6 @@ function shorten-url() {
         curl -s https://www.googleapis.com/urlshortener/v1/url -H 'Content-Type: application/json' -d "{\"longUrl\": \"$1\"}" | grep id | awk -F\" '{print $4}'
     fi
 }
-export -f shorten-url
 
 # ------------------------------------------------------------ #
 # Gzip compressing function
@@ -256,7 +271,6 @@ function compress-gz() {
         echo "No such directory."
     fi
 }
-export -f compress-gz
 
 # ------------------------------------------------------------ #
 # Bzip2 compressing function
@@ -270,7 +284,7 @@ function compress-bz2() {
         echo "No such directory."
     fi
 }
-export -f compress-bz2
+
 # ------------------------------------------------------------ #
 # Swap 2 filenames around, if they exist (from Uzi's bashrc)
 # ------------------------------------------------------------ #
@@ -285,7 +299,6 @@ function swap() {
     mv "$2" "$1"
     mv $TMPFILE "$2"
 }
-export -f swap
 
 # ------------------------------------------------------------ #
 # Find a file with pattern in name
@@ -297,7 +310,6 @@ function findit() {
       find . -iname "*$1*" -print
    fi
 }
-export -f findit
 
 # ------------------------------------------------------------ #
 # Download multiple links with aria2 by simply pasting links 
@@ -308,7 +320,6 @@ function aria2c-multi() {
     $(which aria2c) -i "$OUT"
     rm -rf "$OUT"
 }
-export -f aria2c-multi
 
 # ------------------------------------------------------------ #
 # cut the extension from the file path 
@@ -317,4 +328,3 @@ function get-filename() {
     local file="$1"
     echo "${file%.*}"
 }
-export -f get-filename

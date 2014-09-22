@@ -35,6 +35,7 @@ set showmode            " Show current mode
 
 " Set syntax coloring on
 syntax enable
+filetype on
 filetype plugin on
 filetype indent on
 set grepprg=grep\ -nH\ $*   " for vim-latex
@@ -100,6 +101,10 @@ set undofile
 set undodir=/tmp
 set nobackup            " Don't create anoying backup files
 
+" nerdtree options
+"autocmd vimenter * NERDTree " auto open nerdtree
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " when quit from the last buffer nerdtree quits too
+
 " Cool tab completion stuff
 set wildmenu
 set wildmode=list:longest,full
@@ -149,9 +154,12 @@ nmap <leader>w :w<CR>
 " toggle paste mode with leader + p
 nmap <leader>p :set paste!<CR>
 
-" vim-nerdtree
+" nerdcommenter
 nmap <leader>cc NERDComToggleComment
 nmap <leader>uu NERDComUncommentLine 
+
+" nerdtree
+nmap <Leader>b <plug>NERDTreeTabsToggle<CR>
 
 " compile and run single java files
 map <F9> :w<CR>:set makeprg=javac\ %<CR>:make<CR>

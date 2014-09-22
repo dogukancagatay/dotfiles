@@ -198,7 +198,7 @@
 	<key>MaxVertically</key>
 	<false/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Desktop</string>
+	<string>~/Documents</string>
 	<key>NSNavPanelExpandedStateForSaveMode</key>
 	<true/>
 	<key>NSQuotedKeystrokeBinding</key>
@@ -238,7 +238,7 @@
 	<key>NSWindow Frame Preferences</key>
 	<string>496 233 924 485 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>254 124 640 451 0 0 1920 1058 </string>
+	<string>415 243 640 451 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>602 282 655 451 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1013,7 +1013,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-05-20T19:01:12Z</date>
+	<date>2014-07-01T13:24:42Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1058,7 +1058,7 @@
 	<key>WebKitDefaultFontSize</key>
 	<integer>11</integer>
 	<key>WebKitStandardFont</key>
-	<string>.Lucida Grande UI</string>
+	<string>Lucida Grande</string>
 	<key>WindowNumber</key>
 	<false/>
 	<key>WindowStyle</key>
@@ -1070,6 +1070,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140421</string>
+	<string>1.0.0.20140518</string>
 </dict>
 </plist>

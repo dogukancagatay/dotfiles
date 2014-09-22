@@ -29,7 +29,6 @@ function export-functions() {
 # simple bench
 # taken from bitbucket.org/TigersWay
 # ------------------------------------------------------------ #
-
 function bench() {
     if [ $(uname -s) = "Linux" ]; then
         cpu=$( awk -F': +' '/model name/ {name=$2} END {print name}' /proc/cpuinfo )
@@ -327,4 +326,72 @@ function aria2c-multi() {
 function get-filename() {
     local file="$1"
     echo "${file%.*}"
+}
+
+# ------------------------------------------------------------ #
+# Change video/audio encoding and hardcode subtitles with ffmpeg 
+# ------------------------------------------------------------ #
+function ff(){
+    ## Settings ###
+    #
+    VIDEO_CODEC="libx264"
+    AUDIO_CODEC="libfdk_aac"
+
+    finished_dir="$HOME/down/finished"
+    # 
+    #
+    ################
+
+    #filename=$(basename "$1")
+    fullpath="$1"
+    filename="${fullpath##*/}" # Strip longest match of */ from start
+    #filename="${filename%.*}"
+    dir="${fullpath:0:${#fullpath} - ${#filename}}"
+    extension="${filename##*.}"
+    filename="${filename%.*}"
+
+    #echo "filename = $filename"
+    #echo "extension = $extension"
+    #echo "dir = $dir"
+
+    #ffmpeg -i aaa.mp4 -filter_complex subtitles=aaa.srt -vcodec libx264 -acodec aac -ac 2 -strict experimental aaa_sub.mp4
+
+    # -vcodec libx264 -acodec aac -ac 2 -strict experimental aaa_sub.mp4"
+
+    command="-i $fullpath"
+
+    #echo -n "Cheking if subtitle exists..."
+    if [ -e "$dir""$filename".srt ]; then
+        #echo "yes"
+        command="$command"" -filter_complex subtitles=$dir$filename".srt
+        command="$command"" -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -ac 2 -strict experimental"
+        command="$command"" $dir""$filename""_sub".mp4
+    else
+        #echo "no"
+        command="$command"" -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -ac 2 -strict experimental"
+        command="$command"" $finished_dir/$dir""$filename".mp4
+    fi
+
+    echo "ffmpeg $command"
+}
+
+# ------------------------------------------------------------ #
+# Change text file encoding to UTF-8 
+# ------------------------------------------------------------ #
+function fromLatin1ToUtf8(){
+    #iconv -f iso-8859-1 -t UTF-8 "$1" > "$1".utf8; mv -f "$1".utf8 "$1"
+    for ARG in "$@"
+    do
+        iconv -f iso-8859-1 -t UTF-8 "$ARG" > "$ARG".utf8; mv -f "$ARG".utf8 "$ARG"
+    done
+}
+
+# ------------------------------------------------------------ #
+# Change new lines to from dos to unix type 
+# ------------------------------------------------------------ #
+function fromDosToUnix(){
+    for ARG in "$@"
+    do
+        dos2unix "$ARG"
+    done
 }

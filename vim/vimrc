@@ -103,6 +103,8 @@ set nobackup            " Don't create anoying backup files
 
 " nerdtree options
 "autocmd vimenter * NERDTree " auto open nerdtree
+autocmd vimenter * NERDTreeTabsToggle " auto open nerdtree
+autocmd vimenter * wincmd l " auto open nerdtree
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " when quit from the last buffer nerdtree quits too
 
 " Cool tab completion stuff

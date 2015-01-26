@@ -337,6 +337,7 @@ function ff(){
     VIDEO_CODEC="libx264"
     AUDIO_CODEC="libfdk_aac"
 
+    #finished_dir="$HOME/down/finished"
     finished_dir="$HOME/down/finished"
     # 
     #
@@ -369,7 +370,7 @@ function ff(){
     else
         #echo "no"
         command="$command"" -vcodec $VIDEO_CODEC -acodec $AUDIO_CODEC -ac 2 -strict experimental"
-        command="$command"" $finished_dir/$dir""$filename".mp4
+        command="$command"" $dir""$filename".mp4
     fi
 
     echo "ffmpeg $command"

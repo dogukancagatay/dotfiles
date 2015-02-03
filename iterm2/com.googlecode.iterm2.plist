@@ -17,7 +17,7 @@
 	<key>AutoHideTmuxClientSession</key>
 	<false/>
 	<key>CheckTestRelease</key>
-	<true/>
+	<false/>
 	<key>ClosingHotkeySwitchesSpaces</key>
 	<true/>
 	<key>CommandSelection</key>
@@ -88,6 +88,20 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0xf702-0x280000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>b</string>
+		</dict>
+		<key>0xf702-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>[H</string>
+		</dict>
 		<key>0xf702-0x320000</key>
 		<dict>
 			<key>Action</key>
@@ -101,6 +115,20 @@
 			<integer>0</integer>
 			<key>Text</key>
 			<string></string>
+		</dict>
+		<key>0xf703-0x280000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>f</string>
+		</dict>
+		<key>0xf703-0x300000</key>
+		<dict>
+			<key>Action</key>
+			<integer>10</integer>
+			<key>Text</key>
+			<string>[F</string>
 		</dict>
 		<key>0xf703-0x320000</key>
 		<dict>
@@ -236,9 +264,9 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-	<string>496 233 924 485 0 0 1440 878 </string>
+	<string>890 383 924 485 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>415 243 640 451 0 0 1440 878 </string>
+	<string>742 264 640 451 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>602 282 655 451 0 0 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
@@ -1009,11 +1037,11 @@
 	<key>SUEnableAutomaticChecks</key>
 	<true/>
 	<key>SUFeedURL</key>
-	<string>http://iterm2.com/appcasts/testing.xml</string>
+	<string>http://iterm2.com/appcasts/final.xml</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2014-07-01T13:24:42Z</date>
+	<date>2014-10-14T09:18:20Z</date>
 	<key>SavePasteHistory</key>
 	<false/>
 	<key>Secure Input</key>
@@ -1070,6 +1098,6 @@
 	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
-	<string>1.0.0.20140518</string>
+	<string>2.0</string>
 </dict>
 </plist>

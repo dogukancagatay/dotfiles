@@ -43,7 +43,9 @@ if [ $(uname -s) = "Darwin" ]; then
     fi
 
     # gnubin utils installed with macports
-    PATH="/opt/local/libexec/gnubin:$PATH"
+    if [ -d /opt/local/libexec/gnubin ]; then
+        PATH="/opt/local/libexec/gnubin:$PATH"
+    fi
 
     # gnuplot
     export GNUTERM=X11

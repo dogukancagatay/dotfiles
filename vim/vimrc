@@ -182,3 +182,4 @@ function! Tr_char_fix()
     :call Dos2unix() | %s/Ý\|ý\|Þ\|þ\|Ð\|ð/\={'ð':'ğ','Ð':'Ğ','þ':'ş','Þ':'Ş','ý':'ı','Ý':'İ'}[submatch(0)]/g
 endfunction
 
+autocmd FileType sml setlocal makeprg=sml\ '%'

@@ -338,7 +338,7 @@ function ff(){
     AUDIO_CODEC="libfdk_aac"
 
     #finished_dir="$HOME/down/finished"
-    finished_dir="$HOME/down/finished"
+    #finished_dir="$HOME/down/finished"
     # 
     #
     ################
@@ -394,5 +394,19 @@ function fromDosToUnix(){
     for ARG in "$@"
     do
         dos2unix "$ARG"
+    done
+}
+ 
+
+function human_print(){
+    while read B dummy; do
+        [ $B -lt 1024 ] && echo ${B} bytes && break
+        KB=$(((B+512)/1024))
+        [ $KB -lt 1024 ] && echo ${KB} kilobytes && break
+        MB=$(((KB+512)/1024))
+        [ $MB -lt 1024 ] && echo ${MB} megabytes && break
+        GB=$(((MB+512)/1024))
+        [ $GB -lt 1024 ] && echo ${GB} gigabytes && break
+        echo $(((GB+512)/1024)) terabytes
     done
 }

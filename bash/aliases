@@ -1,6 +1,7 @@
 alias vi="vim"
 alias ls="ls --color=auto"
-alias ll="ls --color -lha"
+alias ll="ls --color -lh"
+alias lll="ls --color -lha"
 alias la="ls --color -la"
 alias grep="grep --color"
 alias pgrep="pgrep -f"

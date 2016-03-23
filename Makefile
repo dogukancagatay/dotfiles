@@ -12,6 +12,7 @@ all:
 	[ -d ~/.oh-my-zsh/custom/plugins ] || ln -s ~/.zsh/plugins ~/.oh-my-zsh/custom/plugins
 	[ -f ~/.oh-my-zsh/themes/pardus.zsh-theme ] || ln -s ~/.zsh/pardus.zsh-theme ~/.oh-my-zsh/themes/pardus.zsh-theme
 	[ -f ~/.screenrc ] || ln -s $(PWD)/screenrc ~/.screenrc
+	[ -f ~/.tmux.conf ] || ln -s $(PWD)/tmux.conf ~/.tmux.conf
 	[ -d ~/.aria2 ] || ln -s $(PWD)/aria2 ~/.aria2
 	
 

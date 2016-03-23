@@ -54,3 +54,11 @@
 	path = vim/bundle/vim-nerdtree-tabs
 	url = https://github.com/jistr/vim-nerdtree-tabs.git
     ignore = dirty
+[submodule "vim/bundle/vim-json"]
+	path = vim/bundle/vim-json
+	url = https://github.com/elzr/vim-json.git
+    ignore = dirty
+[submodule "bash/bash-git-prompt"]
+	path = bash/bash-git-prompt
+	url = https://github.com/magicmonty/bash-git-prompt.git
+    ignore = dirty

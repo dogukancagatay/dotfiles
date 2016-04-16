@@ -114,6 +114,9 @@ autocmd vimenter * wincmd l " auto open nerdtree
 " when quit from the last buffer nerdtree quits too
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
+" vim-airline settings
+let g:airline#extensions#tabline#enabled = 1
+
 " Cool tab completion stuff
 set wildmenu
 set wildmode=list:longest,full

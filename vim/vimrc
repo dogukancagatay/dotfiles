@@ -117,6 +117,9 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTree
 " vim-airline settings
 let g:airline#extensions#tabline#enabled = 1
 
+" vim-gitgutter settings
+set updatetime=250
+
 " Cool tab completion stuff
 set wildmenu
 set wildmode=list:longest,full

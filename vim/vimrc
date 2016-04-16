@@ -69,7 +69,7 @@ set mouse=a             " Use mouse wheel to scroll up/down
 
 " Theme settings
 " colorscheme elflord
-colorscheme monokai 
+colorscheme monokai
 set background=dark
 if has("gui_running")
     let g:molokai_original = 1
@@ -112,7 +112,7 @@ let g:script_runner_key = '<F5>'
 autocmd vimenter * NERDTreeTabsToggle " auto open nerdtree
 autocmd vimenter * wincmd l " auto open nerdtree
 " when quit from the last buffer nerdtree quits too
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif 
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " Cool tab completion stuff
 set wildmenu
@@ -130,10 +130,10 @@ let mapleader = ","
 let g:mapleader = ","
 
 " CTRL+N x2 shows line numbers
-nmap <C-N><C-N> :set invnumber <CR>     
+nmap <C-N><C-N> :set invnumber <CR>
 
 " open spell checker
-map <leader>ss :setlocal spell! <CR><CR> 
+map <leader>ss :setlocal spell! <CR><CR>
 
 " Enables to move upward/downward at long lines
 map <UP> gk
@@ -165,6 +165,10 @@ nmap <leader>cc NERDComToggleComment
 " nerdtree
 nmap <Leader>b <plug>NERDTreeTabsToggle<CR>
 
+" Enable extended regex vim search
+nnoremap / /\v
+vnoremap / /\v
+
 " compile and run single java files
 map <F9> :w<CR>:set makeprg=javac\ %<CR>:make<CR>
 map <F10> :!echo %\|awk -F. '{print $1}'\|xargs java<CR>
@@ -174,7 +178,7 @@ function! Tr_char_to_latex()
     :%s/ğ\|Ğ\|ç\|Ç\|ş\|Ş\|ü\|Ü\|ö\|Ö\|ı\|İ/\={'ğ':'\u{g}','Ğ':'\u{G}','ç':'\c{c}','Ç':'\c{C}','ş':'\c{s}','Ş':'\c{S}','ü':'\"{u}','Ü':'\"{U}','ö':'\"{o}','Ö':'\"{O}','ı':'{\i}','İ':'\.{I}'}[submatch(0)]/g
 endfunction
 
-" Changes file encoding to utf-8 and file format to unix 
+" Changes file encoding to utf-8 and file format to unix
 function! Dos2unix()
     :set fileformat=unix | set fileencoding=utf8 | %s///g
 endfunction

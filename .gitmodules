@@ -2,21 +2,9 @@
     path = vim/bundle/nerdcommenter
     url = https://github.com/scrooloose/nerdcommenter.git
     ignore = dirty
-[submodule "vim/bundle/vim-powerline"]
-    path = vim/bundle/vim-powerline
-    url = https://github.com/Lokaltog/vim-powerline.git
-    ignore = dirty
-[submodule "vim/bundle/gundo.vim"]
-    path = vim/bundle/gundo.vim
-    url = https://github.com/sjl/gundo.vim.git
-    ignore = dirty
 [submodule "vim/bundle/vim-autoclose"]
     path = vim/bundle/vim-autoclose
     url = https://github.com/Townk/vim-autoclose.git
-    ignore = dirty
-[submodule "vim/bundle/ctrlp.vim"]
-    path = vim/bundle/ctrlp.vim
-    url = https://github.com/kien/ctrlp.vim.git
     ignore = dirty
 [submodule "vim/bundle/vim-markdown"]
     path = vim/bundle/vim-markdown
@@ -33,10 +21,6 @@
 [submodule "zsh/plugins/zsh-syntax-highlighting"]
     path = zsh/plugins/zsh-syntax-highlighting
     url = https://github.com/zsh-users/zsh-syntax-highlighting.git
-    ignore = dirty
-[submodule "vim/bundle/MatchTag"]
-    path = vim/bundle/MatchTag
-    url = https://github.com/gregsexton/MatchTag.git
     ignore = dirty
 [submodule "vim/bundle/vim-script-runner"]
     path = vim/bundle/vim-script-runner
@@ -62,3 +46,18 @@
 	path = bash/bash-git-prompt
 	url = https://github.com/magicmonty/bash-git-prompt.git
     ignore = dirty
+[submodule "vim/bundle/editorconfig-vim"]
+	path = vim/bundle/editorconfig-vim
+	url = https://github.com/editorconfig/editorconfig-vim.git
+[submodule "vim/bundle/vim-ansible-yaml"]
+	path = vim/bundle/vim-ansible-yaml
+	url = https://github.com/chase/vim-ansible-yaml.git
+[submodule "vim/bundle/MatchTagAlways"]
+	path = vim/bundle/MatchTagAlways
+	url = https://github.com/Valloric/MatchTagAlways.git
+[submodule "vim/bundle/vim-airline"]
+	path = vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline.git
+[submodule "vim/bundle/vim-gitgutter"]
+	path = vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git

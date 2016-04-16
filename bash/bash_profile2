@@ -1,2 +1,4 @@
 # This is an additional bash_profile file for 
 # computer specific options.
+
+export PATH="$USER/Library/Python/2.7/bin:$PATH"

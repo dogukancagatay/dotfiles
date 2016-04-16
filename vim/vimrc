@@ -5,7 +5,7 @@
 " Tidy up by Onur Küçük <onur@pardus.org.tr>
 " Some good stuff is taken from Derek Wyatt's Vim Configuration <http://github.com/derekwyatt>
 " Some more good stuff is taken from Fatih Arslan's Vim Configuration <http://github.com/farslan>
-" And bundled, modified by Doğukan Çağatay <http://github.com/dogukancagatay> 
+" Bundled and modified by Doğukan Çağatay <http://github.com/dogukancagatay>
 
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
@@ -20,9 +20,7 @@ set autoindent          " Always set auto-indenting on
 set tabstop=4
 set shiftwidth=4
 
-"
-"" add a newline after each occurrence of the last search term
-"
+" add a newline after each occurrence of the last search term
 nnoremap SS :%s//&\r/<CR>
 
 " Vi is cooler with these settings :)
@@ -79,15 +77,15 @@ else
     let g:rehash256 = 1
 endif
 
-set modelines=0
+" Disable modeline support
+"set modelines=0
+"set nomodeline
 
 " crontab fix for Mac OS X
 if $VIM_CRONTAB == "true"
     set nobackup
     set nowritebackup
 endif
-
-let g:clipbrdDefaultReg = '+'
 
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
@@ -101,24 +99,24 @@ set viewdir=/tmp
 au BufWinLeave * silent! mkview
 au BufWinEnter * silent! loadview
 
-" Activate gundo
+" Activate undo
 set undofile
 set undodir=/tmp
 set nobackup            " Don't create anoying backup files
+
+" Setup vim-script-runner
+let g:script_runner_key = '<F5>'
 
 " nerdtree options
 "autocmd vimenter * NERDTree " auto open nerdtree
 autocmd vimenter * NERDTreeTabsToggle " auto open nerdtree
 autocmd vimenter * wincmd l " auto open nerdtree
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif " when quit from the last buffer nerdtree quits too
+" when quit from the last buffer nerdtree quits too
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif 
 
 " Cool tab completion stuff
 set wildmenu
 set wildmode=list:longest,full
-
-" Enable powerline fancy symbols
-" set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 10 
-" let g:Powerline_symbols = 'fancy'
 
 " #####################
 " # Mappings
@@ -144,9 +142,9 @@ map k gk
 map j gj
 
 " Tab controls
+nmap <leader>t :tabnew<CR>
 nmap <leader>n :tabprevious<CR>
 nmap <leader>m :tabnext<CR>
-nmap <leader>t :tabnew<CR>
 
 " CtrlP leader mappings
 nmap <leader>f :CtrlPMixed<CR>
@@ -163,7 +161,6 @@ nmap <leader>p :set paste!<CR>
 
 " nerdcommenter
 nmap <leader>cc NERDComToggleComment
-nmap <leader>uu NERDComUncommentLine 
 
 " nerdtree
 nmap <Leader>b <plug>NERDTreeTabsToggle<CR>
@@ -180,6 +177,11 @@ endfunction
 " Changes file encoding to utf-8 and file format to unix 
 function! Dos2unix()
     :set fileformat=unix | set fileencoding=utf8 | %s///g
+endfunction
+
+" Prettify JSON file
+function! JsonPrettyfy()
+    :%!python -m json.tool
 endfunction
 
 " Fix for corrupted Turkish characters because of encoding changes

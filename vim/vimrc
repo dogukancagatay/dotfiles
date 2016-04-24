@@ -124,22 +124,38 @@ set updatetime=250
 set wildmenu
 set wildmode=list:longest,full
 
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 0
+let g:syntastic_check_on_wq = 0
+
+" Enable aggregate results of multiple checkers
+let g:syntastic_aggregate_errors = 1
+let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+
 " #####################
 " # Mappings
 " ####################
-
-"Getting sudo rights from inside of vim
-command W w !sudo tee % >/dev/null
 
 " This comes first, because there are mappings that depend on leader
 let mapleader = ","
 let g:mapleader = ","
 
+" Enable syntastic check on file save
+" https://github.com/scrooloose/syntastic/issues/1391
+noremap :w<CR> :w<CR>:SyntasticCheck<CR>
+
+" Getting sudo rights from inside of vim
+command W w !sudo tee % >/dev/null
+
 " CTRL+N x2 shows line numbers
 nmap <C-N><C-N> :set invnumber <CR>
 
 " open spell checker
-map <leader>ss :setlocal spell! <CR><CR>
+map <leader>spell :setlocal spell! <CR><CR>
+
+" Do a syntastic Check
+map <leader>ss :SyntasticCheck <CR><CR>
 
 " Enables to move upward/downward at long lines
 map <UP> gk

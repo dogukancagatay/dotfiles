@@ -87,6 +87,13 @@ if $VIM_CRONTAB == "true"
     set nowritebackup
 endif
 
+" nerdtree options
+"autocmd vimenter * NERDTree " auto open nerdtree
+autocmd vimenter * NERDTreeTabsToggle " auto open nerdtree
+autocmd vimenter * wincmd p " auto open nerdtree
+" when quit from the last buffer nerdtree quits too
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+
 " The following changes the default filetype back to 'tex':
 let g:tex_flavor='latex'
 
@@ -106,13 +113,6 @@ set nobackup            " Don't create anoying backup files
 
 " Setup vim-script-runner
 let g:script_runner_key = '<F5>'
-
-" nerdtree options
-"autocmd vimenter * NERDTree " auto open nerdtree
-autocmd vimenter * NERDTreeTabsToggle " auto open nerdtree
-autocmd vimenter * wincmd l " auto open nerdtree
-" when quit from the last buffer nerdtree quits too
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 
 " vim-airline settings
 let g:airline#extensions#tabline#enabled = 1

@@ -1,15 +1,6 @@
 #PS1='\u@\h:\W \$ '
 PS1='\[\033[1m\]\u@\h \[\033[0;31m\]\W \$ \[\033[00m\]'
 
-# set SHELL
-if [ -f /opt/local/bin/bash ]; then
-    SHELL="/opt/local/bin/bash"
-else
-    SHELL="/bin/bash"
-fi
-
-export SHELL=/bin/bash
-
 # make bash history unlimited
 export HISTFILESIZE=
 export HISTSIZE=
@@ -19,7 +10,7 @@ export EDITOR="vim"
 export PAGER="less"
 
 #vi-compatiple command line
-set -o vi
+#set -o vi
 
 # Language preferences
 export LANG="en_US.UTF-8"
@@ -29,7 +20,11 @@ if [ -e "$HOME"/local ]; then
     export LD_LIBRARY_PATH="$HOME"/local/lib:"$HOME"/local/lib64:"$LD_LIBRARY_PATH"
 fi
 
-CLICOLOR=1
+export CLICOLOR=1
+## White background
+#export LSCOLORS=ExFxCxDxBxegedabagacad
+## Dark background
+export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
@@ -37,51 +32,21 @@ if [ $(uname -s) = "Darwin" ]; then
     # QT bin on osx
     #PATH=$PATH:$HOME"/QtSDK/Desktop/Qt/474/gcc/bin"
 
-    # php installation configuration from http://php-osx.liip.ch/
-    if [ -e /usr/local/php5/bin ]; then
-        PATH="/usr/local/php5/bin":$PATH
-    fi
-
-    # gnubin utils installed with macports
-    if [ -d /opt/local/libexec/gnubin ]; then
-        PATH="/opt/local/libexec/gnubin:$PATH"
-    fi
-
-    # gnuplot
-    export GNUTERM=X11
-    
-    #texlive 2013
-    PATH=/usr/local/texlive/2013/bin/x86_64-linux:~/bin:$PATH
-    MANPATH=/usr/local/texlive/2013/texmf-dist/doc/man:$MANPATH
-    INFOPATH=/usr/local/texlive/2013/texmf-dist/doc/info:$INFOPATH
-
-    # MacPorts Installer addition 
-    export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-    export MANPATH="$MANPATH:/opt/local/share/man"
-    export INFOPATH="$INFOPATH:/opt/local/share/info"
-
     # Java home
     export JAVA_HOME=$(/usr/libexec/java_home)
 
     # autojump for bash installed with macports
-    if [ -f /opt/local/etc/profile.d/autojump.sh ]; then
-        source /opt/local/etc/profile.d/autojump.sh
+    if [ -f /usr/local/etc/profile.d/autojump.sh ]; then
+	source /usr/local/etc/profile.d/autojump.sh
         export AUTOJUMP_IGNORE_CASE=1
         export AUTOJUMP_KEEP_SYMLINKS=1
     fi
 
     # bash_completion installation installed with macports
-    if [ -f /opt/local/etc/profile.d/bash_completion.sh ]; then
-        source /opt/local/etc/profile.d/bash_completion.sh
+    if [ -f /usr/local/etc/bash_completion ]; then
+	source /usr/local/etc/bash_completion
     fi
 
-    #for git
-    if [ -f /opt/local/share/git-core/contrib/completion/git-completion.bash ]; then
-        source /opt/local/share/git-core/contrib/completion/git-completion.bash
-    fi
-
-    # Setting PATH for Python 2.7 installed from python.org
-    PATH="/Library/Frameworks/Python.framework/Versions/2.7/bin:${PATH}"
 fi
 
 

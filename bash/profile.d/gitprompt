@@ -14,4 +14,4 @@ GIT_PROMPT_END=" \$ \[\033[00m\]"      # uncomment for custom prompt end sequenc
 # GIT_PROMPT_THEME=Custom # use custom .git-prompt-colors.sh
 # GIT_PROMPT_THEME=Solarized # use theme optimized for solarized color scheme
 
-source ~/.bash/bash-git-prompt/gitprompt.sh
+# source ~/.bash/bash-git-prompt/gitprompt.sh

@@ -3,8 +3,8 @@
 all:
 	[ -d ~/.vim/ ] || ln -s $(PWD)/vim/ ~/.vim
 	[ -f ~/.vimrc ] || ln -s $(PWD)/vim/vimrc ~/.vimrc
-	[ -f ~/.gitconfig ] || ln -s $(PWD)/gitconfig ~/.gitconfig
-	[ -f ~/.gitignore_global ] || ln -s $(PWD)/gitignore_global ~/.gitignore_global
+	[ -f ~/.gitconfig ] || ln -s $(PWD)/git/gitconfig ~/.gitconfig
+	[ -f ~/.gitignore_global ] || ln -s $(PWD)/git/gitignore_global ~/.gitignore_global
 	[ -d ~/.bash ] || ln -s $(PWD)/bash ~/.bash
 	[ -f ~/.bash_profile ] || ln -s ~/.bash/bash_profile ~/.bash_profile
 	[ -f ~/.bash_profile2 ] || ln -s ~/.bash/bash_profile2 ~/.bash_profile2

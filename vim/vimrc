@@ -13,6 +13,7 @@ set nocompatible
 set backspace=2         " same as :set backspace=indent,eol,start
 
 " Activate pathogen
+set nocp
 call pathogen#infect()
 
 " Indentation settings

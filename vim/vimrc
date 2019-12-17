@@ -7,21 +7,47 @@
 " Some more good stuff is taken from Fatih Arslan's Vim Configuration <http://github.com/farslan>
 " Bundled and modified by Doğukan Çağatay <http://github.com/dogukancagatay>
 
+" Install monokai color scheme
+if empty(glob('~/.vim/colors/monokai.vim'))
+  silent !curl -fLo ~/.vim/colors/monokai.vim --create-dirs
+    \ https://raw.githubusercontent.com/sickill/vim-monokai/master/colors/monokai.vim
+  autocmd VimEnter * source $MYVIMRC
+endif
+
+" Install vim-plug plugin manager
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" vim-plug plugin listing
+call plug#begin('~/.vim/plugged')
+
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'tpope/vim-eunuch'
+Plug 'airblade/vim-gitgutter'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'scrooloose/nerdcommenter'
+Plug 'ctrlpvim/ctrlp.vim'
+
+call plug#end()
+
 " Use Vim settings, rather than Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 set backspace=2         " same as :set backspace=indent,eol,start
-
-" Activate pathogen
-set nocp
-call pathogen#infect()
 
 " Indentation settings
 set autoindent          " Always set auto-indenting on
 set tabstop=4
 set shiftwidth=4
 
-" add a newline after each occurrence of the last search term
+" Add a newline after each occurrence of the last search term
 nnoremap SS :%s//&\r/<CR>
 
 " Vi is cooler with these settings :)
@@ -39,8 +65,6 @@ syntax enable
 filetype on
 filetype plugin on
 filetype indent on
-set grepprg=grep\ -nH\ $*   " for vim-latex
-set term=screen-256color        " Powerline doesn't show colors on status bar otherwise
 
 " Search options
 set showmatch
@@ -68,55 +92,9 @@ set mat=5               " show matching for an half sec
 
 set mouse=a             " Use mouse wheel to scroll up/down
 
-" Theme settings
-" colorscheme elflord
-colorscheme monokai
-set background=dark
-if has("gui_running")
-    let g:molokai_original = 1
-else
-    let g:rehash256 = 1
-endif
-
-" Disable modeline support
-"set modelines=0
-"set nomodeline
-
-" crontab fix for Mac OS X
-if $VIM_CRONTAB == "true"
-    set nobackup
-    set nowritebackup
-endif
-
-" nerdtree options
-"autocmd vimenter * NERDTree " auto open nerdtree
-autocmd vimenter * NERDTreeTabsToggle " auto open nerdtree
-autocmd vimenter * wincmd p " auto open nerdtree
-" when quit from the last buffer nerdtree quits too
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
-" The following changes the default filetype back to 'tex':
-let g:tex_flavor='latex'
-
-" disable consealing json double-quotes
-let g:vim_json_syntax_conceal = 0
-
-" make vim save and load the folding of the document each time it loads
-" also places the cursor in the last place that it was left.
-set viewdir=/tmp
-au BufWinLeave * silent! mkview
-au BufWinEnter * silent! loadview
-
-" Activate undo
-set undofile
-set undodir=/tmp
-set nobackup            " Don't create anoying backup files
-
-" Setup vim-script-runner
-let g:script_runner_key = '<F5>'
-
 " vim-airline settings
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='molokai'
 
 " vim-gitgutter settings
 set updatetime=250
@@ -125,14 +103,15 @@ set updatetime=250
 set wildmenu
 set wildmode=list:longest,full
 
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+" Theme settings
+" colorscheme elflord
+colorscheme monokai
 
-" Enable aggregate results of multiple checkers
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_javascript_checkers = ['jshint', 'jscs']
+" make vim save and load the folding of the document each time it loads
+" also places the cursor in the last place that it was left.
+set viewdir=/tmp
+au BufWinLeave * silent! mkview
+au BufWinEnter * silent! loadview
 
 " #####################
 " # Mappings
@@ -171,6 +150,7 @@ nmap <leader>m :tabnext<CR>
 
 " CtrlP leader mappings
 nmap <leader>f :CtrlPMixed<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.tar.gz     " MacOSX/Linux
 
 " force close/write and close
 nmap <leader>q :q!<CR>
@@ -186,7 +166,7 @@ nmap <leader>p :set paste!<CR>
 nmap <leader>cc NERDComToggleComment
 
 " nerdtree
-nmap <Leader>b <plug>NERDTreeTabsToggle<CR>
+nmap <leader>b <plug>NERDTreeTabsToggle<CR>
 
 " Enable extended regex vim search
 nnoremap / /\v
@@ -216,4 +196,17 @@ function! Tr_char_fix()
     :call Dos2unix() | %s/Ý\|ý\|Þ\|þ\|Ð\|ð/\={'ð':'ğ','Ð':'Ğ','þ':'ş','Þ':'Ş','ý':'ı','Ý':'İ'}[submatch(0)]/g
 endfunction
 
+" #####################
+" # Auto commands
+" ####################
+"
 autocmd FileType sml setlocal makeprg=sml\ '%'
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType yml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Open NERDTree automatically when vim starts up
+autocmd vimenter * NERDTree | wincmd p
+
+" How can I close vim if the only window left open is a NERDTree?
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+

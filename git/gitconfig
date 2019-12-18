@@ -34,7 +34,7 @@
 [credential]
 	helper = osxkeychain
 [github]
-	user = dogukancagatay 
+	user = dogukancagatay
 [push]
 	default = matching
 [diff]
@@ -43,3 +43,6 @@
 	tool = vimdiff
 [difftool]
 	prompt = false
+[user]
+	name = Doğukan Çağatay
+	email = dcagatay@gmail.com

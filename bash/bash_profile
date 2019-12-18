@@ -16,7 +16,7 @@ export PAGER="less"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-if [ -e "$HOME"/local ]; then
+if [ -e "$HOME/local" ]; then
     export LD_LIBRARY_PATH="$HOME"/local/lib:"$HOME"/local/lib64:"$LD_LIBRARY_PATH"
 fi
 
@@ -29,28 +29,22 @@ export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
 
-    # QT bin on osx
-    #PATH=$PATH:$HOME"/QtSDK/Desktop/Qt/474/gcc/bin"
-
     # Java home
     export JAVA_HOME=$(/usr/libexec/java_home)
 
-    # autojump for bash installed with macports
+    # Autojump for bash installed with macports
     if [ -f /usr/local/etc/profile.d/autojump.sh ]; then
 	source /usr/local/etc/profile.d/autojump.sh
         export AUTOJUMP_IGNORE_CASE=1
         export AUTOJUMP_KEEP_SYMLINKS=1
     fi
 
-    # bash_completion installation installed with macports
-    #if [ -f /usr/local/etc/bash_completion ]; then
-	#	source /usr/local/etc/bash_completion
-    #fi
-
+	# Mac only
+	export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
 
-## Other 
+## Other
 if [ $(uname -s) = "Linux" ]; then
 
     # autojump for bash (ubuntu package)
@@ -70,28 +64,26 @@ if [ $(uname -s) = "Linux" ]; then
     #if reboot required tell me (Ubuntu)
     if [ -f /var/run/reboot-required ]; then
         echo 'Reboot required'
-    fi 
+    fi
 fi
 
 ## Add home bin to the PATH
-if [ -d ~/local/bin ]; then
+if [ -d "$HOME/bin" ]; then
   export PATH=$PATH:$HOME"/bin"
 fi
 
-if [ -d ~/.bash/profile.d ]; then
-    for f in ~/.bash/profile.d/*; do
+if [ -d "$HOME/.bash/profile.d" ]; then
+    for f in $HOME/.bash/profile.d/*; do
         source $f
     done
 fi
 
-## Computer specific additional profile options
-if [ -f ~/.bash_profile2 ]; then
-    source ~/.bash_profile2
-fi
-
 ## addtional program settings
-if [ -f ~/programs/.bashrc ]; then
-    source ~/programs/.bashrc 
+if [ -f "$HOME/programs/.bashrc" ]; then
+    source $HOME/programs/.bashrc
 fi
 
-export PATH
+## Computer specific additional profile options
+if [ -f "$HOME/.bash_profile2" ]; then
+    source $HOME/.bash_profile2
+fi

@@ -226,10 +226,10 @@ if [ $(uname -s) = "Darwin" ]; then
 fi #finish mac specific part
 
 # ------------------------------------------------------------ #
-# re-source ~/.bash_profile
+# resource ~/.bashrc
 # ------------------------------------------------------------ #
 function resource() {
-    source ~/.bash_profile
+    source ~/.bashrc
 }
 
 # ------------------------------------------------------------ #

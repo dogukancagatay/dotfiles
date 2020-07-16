@@ -53,7 +53,7 @@ nnoremap SS :%s//&\r/<CR>
 " Vi is cooler with these settings :)
 set sta
 set sts=4
-set noexpandtab
+set expandtab
 
 set viminfo='20,\"50    " Read/write a .viminfo file -- limit to only 50
 set history=100         " Keep 100 lines of command history
@@ -210,3 +210,8 @@ autocmd vimenter * NERDTree | wincmd p
 " How can I close vim if the only window left open is a NERDTree?
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
+" If the filetype is Makefile then we need to use tabs
+" So do not expand tabs into space.
+if has("autocmd")
+    autocmd FileType make set noexpandtab
+endif

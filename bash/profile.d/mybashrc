@@ -16,21 +16,26 @@ export PAGER="less"
 export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 
-if [ -e "$HOME/.local" ]; then
-    if [ -e "$HOME/.local/lib" ]; then
-        export LD_LIBRARY_PATH="$HOME"/.local/lib:"$LD_LIBRARY_PATH"
-    fi
-
-    if [ -e "$HOME/.local/lib64" ]; then
-        export LD_LIBRARY_PATH="$HOME"/.local/lib64:"$LD_LIBRARY_PATH"
-    fi
-fi
-
+# Terminal colors
 export CLICOLOR=1
 ## White background
 #export LSCOLORS=ExFxCxDxBxegedabagacad
 ## Dark background
 export LSCOLORS=gxBxhxDxfxhxhxhxhxcxcx
+
+
+## Add home local lib and bin to the PATH
+if [ -e "$HOME/.local/lib" ]; then
+    export LD_LIBRARY_PATH="$HOME/.local/lib:$LD_LIBRARY_PATH"
+fi
+
+if [ -e "$HOME/.local/lib64" ]; then
+    export LD_LIBRARY_PATH="$HOME/.local/lib64:$LD_LIBRARY_PATH"
+fi
+
+if [ -d "$HOME/.local/bin" ]; then
+    export PATH="$HOME/.local/bin:$PATH"
+fi
 
 ## Mac OS X dependent settings
 if [ $(uname -s) = "Darwin" ]; then
@@ -40,13 +45,13 @@ if [ $(uname -s) = "Darwin" ]; then
 
     # Autojump for bash installed with macports
     if [ -f /usr/local/etc/profile.d/autojump.sh ]; then
-	source /usr/local/etc/profile.d/autojump.sh
+    source /usr/local/etc/profile.d/autojump.sh
         export AUTOJUMP_IGNORE_CASE=1
         export AUTOJUMP_KEEP_SYMLINKS=1
     fi
 
-	# Mac only
-	export BASH_SILENCE_DEPRECATION_WARNING=1
+    # Mac only
+    export BASH_SILENCE_DEPRECATION_WARNING=1
 fi
 
 
@@ -73,12 +78,10 @@ if [ $(uname -s) = "Linux" ]; then
     fi
 fi
 
-## Add home bin to the PATH
-if [ -d "$HOME/bin" ]; then
-  export PATH=$PATH:$HOME"/bin"
-fi
+# Explicitly set HOSTNAME variable
+export HOSTNAME=`hostname`
 
-## addtional program settings
-if [ -f "$HOME/programs/.bashrc" ]; then
-    source $HOME/programs/.bashrc
+# Setup direnv if exists
+if [ -x "$(command -v direnv)" ]; then
+    eval "$(direnv hook bash)"
 fi

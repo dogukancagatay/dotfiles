@@ -91,7 +91,7 @@ function genpasswd() {
     #if [[ "$#" -eq "1" ]]; then
     for var in "$@"
     do
-        if [[  -z "`echo $var | tr -d "[:digit:]"`" ]]; then
+        if [[  -z "`echo $var | gtr -d "[:digit:]"`" ]]; then
             l=$var
         else
             case "$var" in
@@ -129,7 +129,7 @@ function genpasswd() {
 
     [ "$l" == "" ] && l=16
     #tr -dc A-Za-z0-9_*?.\)\(\!\%\&\$\#\@- < /dev/urandom | head -c ${l} | xargs 
-    tr -dc ${type} < /dev/urandom | head -c ${l} | xargs 
+    gtr -dc ${type} < /dev/urandom | head -c ${l} | xargs 
 } 
 
 # ------------------------------------------------------------ #
@@ -226,10 +226,10 @@ if [ $(uname -s) = "Darwin" ]; then
 fi #finish mac specific part
 
 # ------------------------------------------------------------ #
-# resource ~/.bashrc
+# re-source ~/.bash_profile
 # ------------------------------------------------------------ #
 function resource() {
-    source ~/.bashrc
+    source ~/.bash_profile
 }
 
 # ------------------------------------------------------------ #

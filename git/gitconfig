@@ -28,21 +28,36 @@
     changed = green
     untracked = cyan
 [core]
-    whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+    whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
     editor = vim
     excludesfile = ~/.gitignore_global
 [credential]
-	helper = osxkeychain
-[github]
-	user = dogukancagatay
+    helper = osxkeychain
+
 [push]
-	default = matching
+    default = current
+
 [diff]
-	tool = vimdiff
+    tool = vimdiff
+
 [merge]
-	tool = vimdiff
+    tool = vimdiff
+
 [difftool]
-	prompt = false
+    prompt = false
+
+[github]
+    user = dogukancagatay
+
 [user]
 	name = Doğukan Çağatay
 	email = dcagatay@gmail.com
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[pull]
+	rebase = false
